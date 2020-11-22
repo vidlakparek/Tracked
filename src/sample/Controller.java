@@ -35,7 +35,7 @@ public class Controller {
             }
         Connection pripojeni = null;
         try {
-            pripojeni = DriverManager.getConnection("jdbc:mysql://https://89.203.248.248:3306/Tracked?user=Karel@karel.cz&password=karelkarel");
+            pripojeni = DriverManager.getConnection("jdbc:mysql://89.203.248.248:3306/Tracked&Karel@karel.cz&karelkarel&useSSL=false");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -47,6 +47,7 @@ public class Controller {
             }
             try {
                 ResultSet vysledky = dotaz.executeQuery();
+                System.out.println(vysledky);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
