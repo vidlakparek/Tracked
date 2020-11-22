@@ -48,7 +48,11 @@ public class Controller {
         ResultSet vysledky = null;
             try {
                 vysledky = dotaz.executeQuery();
-                System.out.println(vysledky);
+                while(vysledky.next()){
+                    String Email = vysledky.getString(1);
+                    int i = vysledky.getInt(2);
+                    System.out.println(Email+i);
+                }
                 vysledky.close();
                 dotaz.close();
                 pripojeni.close();
