@@ -14,6 +14,7 @@ public class Main extends Application {
         primaryStage.setTitle("Tracked");
         primaryStage.setScene(new Scene(root, 700, 500));
         primaryStage.show();
+
     }
 
 
