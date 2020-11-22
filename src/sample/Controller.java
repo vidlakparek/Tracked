@@ -1,6 +1,7 @@
 package sample;
 
 
+import com.mysql.jdbc.PreparedStatement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -12,6 +13,10 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 
 public class Controller {
@@ -23,15 +28,20 @@ public class Controller {
 
     public void login(ActionEvent actionEvent) {
 
-           /* try {
+           try {
                 Class.forName("com.mysql.jdbc.Driver");
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-            Connection pripojeni = DriverManager.getConnection();
-            PreparedStatement dotaz = null;
+        Connection pripojeni = null;
+        try {
+            pripojeni = DriverManager.getConnection("jdbc:mysql://89.203.248.248/Tracked?user=Karel&password=karelkarel");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        PreparedStatement dotaz = null;
             try {
-                dotaz = pripojeni.prepareStatement("SELECT * FROM ");
+                dotaz = (PreparedStatement) pripojeni.prepareStatement("SELECT * FROM phpmyadmin");
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
@@ -39,7 +49,7 @@ public class Controller {
                 ResultSet vysledky = dotaz.executeQuery();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
-            }*/
+            }
 
 
     }
