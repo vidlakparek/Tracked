@@ -35,7 +35,7 @@ public class Controller {
             }
         Connection pripojeni = null;
         try {
-            pripojeni = DriverManager.getConnection("jdbc:mysql://89.203.248.248:3306/Tracked?user=Karel@karel.cz&password=karelkarel&useSSL=false");
+            pripojeni = DriverManager.getConnection("jdbc:mysql://89.203.248.248:3306/Tracked?user="+mail.getText()+"&password="+pass.getText()+"&useSSL=false");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
