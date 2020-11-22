@@ -35,13 +35,13 @@ public class Controller {
             }
         Connection pripojeni = null;
         try {
-            pripojeni = DriverManager.getConnection("jdbc:mysql://89.203.248.248:3306/Tracked&Karel@karel.cz&karelkarel&useSSL=false");
+            pripojeni = DriverManager.getConnection("jdbc:mysql://89.203.248.248:3306/Tracked?user=Karel@karel.cz&password=karelkarel&useSSL=false");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         PreparedStatement dotaz = null;
             try {
-                dotaz = (PreparedStatement) pripojeni.prepareStatement("SELECT * FROM Users");
+                dotaz = (PreparedStatement) pripojeni.prepareStatement("SELECT * FROM User");
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
