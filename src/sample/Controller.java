@@ -45,12 +45,17 @@ public class Controller {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
+        ResultSet vysledky = null;
             try {
-                ResultSet vysledky = dotaz.executeQuery();
+                vysledky = dotaz.executeQuery();
                 System.out.println(vysledky);
+                vysledky.close();
+                dotaz.close();
+                pripojeni.close();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
+
 
 
     }
