@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -24,6 +25,7 @@ public class Controller {
     public TextField mail;
     public PasswordField pass;
     public Button log_butt;
+    public Label wrong_cred;
 
 
     public void login(ActionEvent actionEvent) {
@@ -37,6 +39,7 @@ public class Controller {
         try {
             pripojeni = DriverManager.getConnection("jdbc:mysql://89.203.248.248:3306/Tracked?user="+mail.getText()+"&password="+pass.getText()+"&useSSL=false");
         } catch (SQLException throwables) {
+            wrong_cred.setVisible(true);
             throwables.printStackTrace();
         }
         PreparedStatement dotaz = null;
