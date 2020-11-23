@@ -64,7 +64,9 @@ public class Controller {
             }
 
 
-
+    }
+    public String getMail(){
+        return mail.getText();
     }
     public void change(ActionEvent event){
 
