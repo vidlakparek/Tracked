@@ -10,6 +10,12 @@
 -fx-font-size: 75 px;
 }
 
+#wrong_cred{
+-fx-alignment: center;
+-fx-text-fill: #ff0000;
+
+}
+
 .login{
 -fx-background-radius:  100px;
 }
