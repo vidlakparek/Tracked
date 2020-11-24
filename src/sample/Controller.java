@@ -3,6 +3,7 @@ package sample;
 
 import com.mysql.jdbc.PreparedStatement;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -11,13 +12,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 
 public class Controller {
@@ -27,7 +33,7 @@ public class Controller {
     public Button log_butt;
     public Label wrong_cred;
 
-
+    
     public void login(ActionEvent actionEvent) {
 
            try {
