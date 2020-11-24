@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.stage.Stage;
 
@@ -14,19 +13,10 @@ import java.io.IOException;
 
 public class ControllerLoged {
 
+    public TableColumn<?, ?> idUkol;
+    public TableColumn<?, ?> ukol;
 
-    @FXML
-    private Label idMail;
 
-    @FXML
-    private TableColumn<?, ?> idUkol;
-
-    @FXML
-    private TableColumn<?, ?> ukol;
-
-    public void initializate(){
-        idMail.setText(new Controller().getMail());
-    }
 
     public void change(ActionEvent event){
 

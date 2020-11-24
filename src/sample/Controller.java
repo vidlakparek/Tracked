@@ -42,32 +42,10 @@ public class Controller {
             wrong_cred.setVisible(true);
             throwables.printStackTrace();
         }
-        PreparedStatement dotaz = null;
-            try {
-                dotaz = (PreparedStatement) pripojeni.prepareStatement("SELECT * FROM User");
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-        ResultSet vysledky = null;
-            try {
-                vysledky = dotaz.executeQuery();
-                while(vysledky.next()){
-                    String Email = vysledky.getString(1);
-                    int i = vysledky.getInt(2);
-                    System.out.println(Email+i);
-                }
-                vysledky.close();
-                dotaz.close();
-                pripojeni.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-
+        if(pripojeni != null)change(actionEvent);
 
     }
-    public String getMail(){
-        return mail.getText();
-    }
+
     public void change(ActionEvent event){
 
         Parent LogPar = null;
@@ -79,6 +57,7 @@ public class Controller {
         Scene loged = new Scene(LogPar,700,500);
         Stage okno = (Stage)((Node)event.getSource()).getScene().getWindow();
         okno.setScene(loged);
+        okno.setTitle("Tracked - " + mail.getText());
         okno.show();
     }
 }
