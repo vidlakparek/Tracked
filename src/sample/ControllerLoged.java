@@ -31,4 +31,26 @@ public class ControllerLoged {
         okno.setScene(sample);
         okno.show();
     }
-}
+
+    public void log_out(ActionEvent event) {
+        try {
+            Controller.pripojeni.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+            Parent LogPar = null;
+            try {
+                LogPar = FXMLLoader.load(getClass().getResource("sample.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Scene loged = new Scene(LogPar,700,500);
+            Stage okno = (Stage)((Node)event.getSource()).getScene().getWindow();
+            okno.setScene(loged);
+            okno.setTitle("Tracked - přihlašování");
+            okno.show();
+        }
+    }
+

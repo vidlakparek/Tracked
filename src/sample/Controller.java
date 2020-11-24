@@ -26,7 +26,7 @@ public class Controller {
     public PasswordField pass;
     public Button log_butt;
     public Label wrong_cred;
-
+    public static Connection pripojeni = null;
 
     public void login(ActionEvent actionEvent) {
 
@@ -35,7 +35,7 @@ public class Controller {
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-        Connection pripojeni = null;
+
         try {
             pripojeni = DriverManager.getConnection("jdbc:mysql://89.203.248.248:3306/Tracked?user="+mail.getText()+"&password="+pass.getText()+"&useSSL=false");
         } catch (SQLException throwables) {
