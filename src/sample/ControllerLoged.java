@@ -52,5 +52,21 @@ public class ControllerLoged {
             okno.setTitle("Tracked - přihlašování");
             okno.show();
         }
+
+    public void add_task(ActionEvent event) {
+        /* Vyskočení dialogového okna, do kterého uživatel zadá aparametery pro vytvřoení nového tasku*/
     }
+
+    public void refresh(ActionEvent event) {
+        /*Aktualizace seznamu tasks, stejně jako při stisknutí klávesy F5*/
+    }
+
+    public void clear_done(ActionEvent event) {
+        /* Skryje tasks, které jsou již dokončeny.*/
+    }
+
+    public void sort(ActionEvent event) {
+        /*Seřadí tasks podle toho, která možnost byla zvolena.*/
+    }
+}
 
