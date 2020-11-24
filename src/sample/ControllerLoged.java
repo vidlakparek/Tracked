@@ -15,18 +15,9 @@ import java.io.IOException;
 public class ControllerLoged {
 
 
-    @FXML
-    private Label idMail;
 
-    @FXML
-    private TableColumn<?, ?> idUkol;
 
-    @FXML
-    private TableColumn<?, ?> ukol;
 
-    public void initializate(){
-        idMail.setText(new Controller().getMail());
-    }
 
     public void change(ActionEvent event){
 

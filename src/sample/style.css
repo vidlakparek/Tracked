@@ -2,7 +2,7 @@
   font-family: 'Logo';
   src: url(PathwayGothicOne-Regular.ttf);
 }
-
+//Log in page
 #logo{
 -fx-font-family: "Logo";
 -fx-text-fill: #2196f3;
@@ -40,3 +40,4 @@
     -fx-text-fill:#ffffff
 }
 
+//Logged in
