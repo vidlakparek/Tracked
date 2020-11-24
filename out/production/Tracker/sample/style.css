@@ -42,5 +42,7 @@
 
 //Logged in
 #logout{
--fx-alignment: right;
+-fx-background-color: #2196f3;
+-fx-text-fill:#ffffff;
+-fx-border-radius:  0px;
 }

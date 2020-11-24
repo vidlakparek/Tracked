@@ -4,11 +4,12 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerLoged">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerLoged">
    <children>
-      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="531.0">
+      <MenuBar layoutX="-6.0" layoutY="2.0" prefHeight="25.0" prefWidth="636.0" stylesheets="@style.css" AnchorPane.leftAnchor="-6.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="0.0">
         <menus>
           <Menu mnemonicParsing="false" text="Řazení">
             <items>
@@ -22,6 +23,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Button layoutX="530.0" layoutY="-4.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="70.0" text="Log out" />
+      <Button id="logout" layoutX="530.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" stylesheets="@style.css" text="Log out" AnchorPane.leftAnchor="630.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <ScrollBar layoutX="667.0" layoutY="44.0" orientation="VERTICAL" prefHeight="433.0" prefWidth="23.0" />
    </children>
 </AnchorPane>
