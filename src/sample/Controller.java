@@ -1,7 +1,6 @@
 package sample;
 
 
-import com.mysql.jdbc.PreparedStatement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -16,7 +15,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
@@ -59,5 +57,9 @@ public class Controller {
         okno.setScene(loged);
         okno.setTitle("Tracked - " + mail.getText());
         okno.show();
+    }
+
+    public static Connection getConnection(){
+        return pripojeni;
     }
 }

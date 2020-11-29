@@ -20,9 +20,10 @@ public class ControllerLoged {
     int color;
 
    // @Override
-    public void initialize(){
+    public void initialize(ActionEvent actionEvent){
 
         task.setStyle("-fx-background-color: #"+color+"");
+
     }
     public void log_out(ActionEvent event) {
         try {
