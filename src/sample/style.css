@@ -1,10 +1,10 @@
 @font-face {
-  font-family: 'Logo';
+  font-family: "Font";
   src: url(PathwayGothicOne-Regular.ttf);
 }
 //Log in page
 #logo{
--fx-font-family: "Logo";
+-fx-font-family: "Font";
 -fx-text-fill: #2196f3;
 -fx-alignment: center ;
 -fx-font-size: 75 px;
