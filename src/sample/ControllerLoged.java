@@ -19,12 +19,16 @@ public class ControllerLoged {
 
     public Pane task;
     public Label name;
-    int color;
+
 
 
     public void initialize(){
         Task.addTask();
-        name.setText(Task.getNameFromArray(0));
+        /*for(int i = 0;i<Task.getLength();i++) {
+            task[i] = new Pane();
+            name[i] = new Label();*/
+            name.setText(Task.getNameFromArray(0));
+        //}
     }
     public void log_out(ActionEvent event) {
 

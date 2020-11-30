@@ -20,14 +20,14 @@ public class Task {
     public static ArrayList<Task> tasks;
 
     public Task(int ID, String name, String desc, Date deadline, int priority, String dir_users, int groups, boolean stav){
-    this.ID = ID;
-    this.name = name;
-    this.desc = desc;
-    this.deadline = deadline;
-    this.priority = priority;
-    this.dir_users = dir_users;
-    this.groups = groups;
-    this.stav = stav;
+    Task.ID = ID;
+    Task.name = name;
+    Task.desc = desc;
+    Task.deadline = deadline;
+    Task.priority = priority;
+    Task.dir_users = dir_users;
+    Task.groups = groups;
+    Task.stav = stav;
     }
     public static String getName(Object a){
         return name;
@@ -101,11 +101,11 @@ public class Task {
                         name = vysledky.getString(2);
                         System.out.println(name);
                         desc = vysledky.getString(3);
-                        deadline = vysledky.getDate(5);
-                        priority = vysledky.getInt(6);
-                        dir_users = vysledky.getString(7);
-                        groups = vysledky.getInt(8);
-                        stav = vysledky.getBoolean(9);
+                        deadline = vysledky.getDate(4);
+                        priority = vysledky.getInt(5);
+                        dir_users = vysledky.getString(6);
+                        groups = vysledky.getInt(7);
+                        stav = vysledky.getBoolean(8);
                         tasks.add(new Task(ID,name,desc,deadline,priority,dir_users,groups,stav));
                     }
                 } catch (SQLException throwables) {
@@ -115,5 +115,7 @@ public class Task {
 
     }
 
-
+    public static int getLength(){
+        return tasks.size();
+    }
 }
