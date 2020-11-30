@@ -48,6 +48,7 @@ public class Task {
                     if (!vysledky.next()) {
                         ID = vysledky.getInt(1);
                         name = vysledky.getString(2);
+                        System.out.println(name);
                         desc = vysledky.getString(3);
                         sh_desc = vysledky.getString(4);
                         deadline = vysledky.getDate(5);
