@@ -18,7 +18,7 @@ public class Task {
     static String dir_users;
     static int groups;
     static boolean stav;
-    public static ArrayList tasks;
+    public static ArrayList<Task> tasks;
 
     public Task(int ID, String name, String desc, String sh_desc, Date deadline, int priority, String dir_users, int groups, boolean stav){
     this.ID = ID;
@@ -31,11 +31,9 @@ public class Task {
     this.groups = groups;
     this.stav = stav;
     }
-    public static String getName(Object a){
-        return name;
-    }
-    public static void addTask(){
 
+    public static void addTask(){
+        tasks = new ArrayList<Task>();
             try {
                 Class.forName( "com.mysql.jdbc.Driver" );
             } catch (ClassNotFoundException e) {
@@ -45,18 +43,18 @@ public class Task {
             try {
                 PreparedStatement dotaz = conn.prepareStatement("SELECT * FROM Tasks");
                 ResultSet vysledky = dotaz.executeQuery();
-                    if (!vysledky.next()) {
-                        ID = vysledky.getInt(1);
-                        name = vysledky.getString(2);
-                        System.out.println(name);
-                        desc = vysledky.getString(3);
-                        sh_desc = vysledky.getString(4);
-                        deadline = vysledky.getDate(5);
-                        priority = vysledky.getInt(6);
-                        dir_users = vysledky.getString(7);
-                        groups = vysledky.getInt(8);
-                        stav = vysledky.getBoolean(9);
-                        tasks.add(new Task(ID,name,desc,sh_desc,deadline,priority,dir_users,groups,stav));
+                    while (vysledky.next()) {
+                        int ID_g = vysledky.getInt(1);
+                        String name_g = vysledky.getString(2);
+                        String desc_g = vysledky.getString(3);
+                        String sh_desc_g = vysledky.getString(4);
+                        System.out.println(name_g);
+                        Date deadline_g = vysledky.getDate(5);
+                        int priority_g = vysledky.getInt(6);
+                        String dir_users_g = vysledky.getString(7);
+                        int groups_g = vysledky.getInt(8);
+                        boolean stav_g = vysledky.getBoolean(9);
+                        tasks.add(new Task(ID_g,name_g,desc_g,sh_desc_g,deadline_g,priority_g,dir_users_g,groups_g,stav_g));
                     }
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
@@ -64,8 +62,10 @@ public class Task {
 
 
     }
-    public static void getNameFromArray(int index){
-
-        System.out.println(getName(tasks.get(index)));
+    public static String getNameFromArray(int index){
+        return getName(tasks.get(index));
+    }
+    public static String getName(Object a){
+        return name;
     }
 }
