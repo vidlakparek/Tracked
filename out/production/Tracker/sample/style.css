@@ -2,6 +2,9 @@
   font-family: "Font";
   src: url(PathwayGothicOne-Regular.ttf);
 }
+*{
+-fx-font-family : "Font";
+}
 //Log in page
 #logo{
 -fx-font-family: "Font";

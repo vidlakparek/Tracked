@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="sample.CreateTask"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CreateTask">
+   <children>
+      <TextField fx:id="name" layoutX="33.0" layoutY="67.0" prefHeight="42.0" prefWidth="331.0" AnchorPane.topAnchor="65.0" />
+      <TextField fx:id="desc" layoutX="33.0" layoutY="145.0" prefHeight="88.0" prefWidth="331.0" AnchorPane.topAnchor="145.0" />
+      <DatePicker fx:id="deadline" layoutX="33.0" layoutY="273.0" prefHeight="26.0" prefWidth="331.0" stylesheets="@createTask.css" AnchorPane.topAnchor="270.0" />
+      <ChoiceBox fx:id="priotiry" layoutX="213.0" layoutY="343.0" prefHeight="26.0" prefWidth="150.0" styleClass="choiceBox" stylesheets="@createTask.css" AnchorPane.topAnchor="320.0" />
+      <ChoiceBox fx:id="uklid" layoutX="213.0" layoutY="416.0" prefWidth="150.0" styleClass="choiceBox" stylesheets="@createTask.css" AnchorPane.topAnchor="380.0" />
+      <Label layoutX="33.0" layoutY="37.0" stylesheets="@createTask.css" text="Název" AnchorPane.topAnchor="35.0" />
+      <Label layoutX="33.0" layoutY="119.0" stylesheets="@createTask.css" text="Popisek" AnchorPane.topAnchor="115.0" />
+      <Label layoutX="33.0" layoutY="246.0" stylesheets="@createTask.css" text="Deadline" AnchorPane.topAnchor="240.0" />
+      <Label layoutX="33.0" layoutY="347.0" stylesheets="@createTask.css" text="Priorita" AnchorPane.topAnchor="320.0" />
+      <Label layoutX="33.0" layoutY="419.0" stylesheets="@createTask.css" text="Úklid" AnchorPane.topAnchor="380.0" />
+      <Label layoutX="33.0" layoutY="460.0" stylesheets="@createTask.css" text="Vývoj" AnchorPane.topAnchor="420.0" />
+      <Label layoutX="33.0" layoutY="508.0" stylesheets="@createTask.css" text="Administrativa" AnchorPane.topAnchor="460.0" />
+      <Button id="save" layoutX="245.0" layoutY="520.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="86.0" stylesheets="@createTask.css" text="Uložit" />
+      <ChoiceBox fx:id="administrativas" layoutX="213.0" layoutY="455.0" prefHeight="26.0" prefWidth="150.0" styleClass="choiceBox" stylesheets="@createTask.css" />
+      <ChoiceBox fx:id="vyvoj" layoutX="213.0" layoutY="415.0" prefHeight="26.0" prefWidth="150.0" styleClass="choiceBox" stylesheets="@createTask.css" />
+   </children>
 </AnchorPane>
