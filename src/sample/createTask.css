@@ -5,16 +5,25 @@
 *{
 -fx-font-family : "Font";
 }
+#pane{
+ -fx-background-radius:  45px;
+ -fx-border-radius:  45px;
+ -fx-background-color: rgb(255,255,255);opacity:0.2;
+
+}
 .label{
 -fx-text-fill: #2196f3;
--fx-text-size: 20pt;
+-fx-font-size: 15px;
 }
 .choiceBox{
  -fx-background-color: #2196f3;
- -fx-text-fill: #ffffff;
  -fx-border-color:#ffffff;
  -fx-background-radius:  100px;
  -fx-border-radius:  100px;
+ -fx-alignment: CENTER;
+ -fx-content-display: LEFT;
+}
+
 }
 #save{
  -fx-background-color: #2196f3;
@@ -27,6 +36,5 @@
  -fx-border-radius:  100px;
  }
  #save:hover {
-     -fx-background-color: #ffffff !important;
-     -fx-text-fill:#2196f3;
+     -fx-background-color: #074c82 !important;
      }
