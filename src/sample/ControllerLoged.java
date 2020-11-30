@@ -19,15 +19,19 @@ public class ControllerLoged {
 
     public Pane task;
     public Label name;
-    int color;
 
-    //@Override
-    public void initialize(ActionEvent actionEvent){
-        name.setText(Task.name);
-        task.setStyle("-fx-background-color: #"+color+"");
 
+
+    public void initialize(){
+        Task.addTask();
+        /*for(int i = 0;i<Task.getLength();i++) {
+            task[i] = new Pane();
+            name[i] = new Label();*/
+            name.setText(Task.getNameFromArray(0));
+        //}
     }
     public void log_out(ActionEvent event) {
+
         try {
             Controller.pripojeni.close();
         }
@@ -46,8 +50,6 @@ public class ControllerLoged {
             okno.setScene(loged);
             okno.setTitle("Tracked - přihlašování");
             okno.show();
-            Task.addTask();
-            Task.getNameFromArray(0);
         }
 
     public void add_task(ActionEvent event) throws IOException {
