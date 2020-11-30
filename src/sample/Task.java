@@ -12,7 +12,6 @@ public class Task {
     static int ID;
     static String name;
     static String desc;
-    static String sh_desc;
     static Date deadline;
     static int priority;
     static String dir_users;
@@ -20,16 +19,70 @@ public class Task {
     static boolean stav;
     public static ArrayList<Task> tasks;
 
-    public Task(int ID, String name, String desc, String sh_desc, Date deadline, int priority, String dir_users, int groups, boolean stav){
+    public Task(int ID, String name, String desc, Date deadline, int priority, String dir_users, int groups, boolean stav){
     this.ID = ID;
     this.name = name;
     this.desc = desc;
-    this.sh_desc = sh_desc;
     this.deadline = deadline;
     this.priority = priority;
     this.dir_users = dir_users;
     this.groups = groups;
     this.stav = stav;
+    }
+    public static String getName(Object a){
+        return name;
+    }
+
+    public static String getDesc(Object a){
+        return desc;
+    }
+
+    public static Date getDeadLine(Object a){
+        return deadline;
+    }
+
+    public static int getPriority(Object a){
+        return priority;
+    }
+
+    public static String getDir_users(Object a){
+        return dir_users;
+    }
+
+    public static int getGroups(Object a){
+        return groups;
+    }
+
+    public static boolean getStav(Object a){
+        return stav;
+    }
+
+    public static String getNameFromArray(int index){
+        return getName(tasks.get(index));
+    }
+
+    public static String getDescFromArray(int index){
+        return getDesc(tasks.get(index));
+    }
+
+    public static Date getDeadlineFromArray(int index){
+        return getDeadLine(tasks.get(index));
+    }
+
+    public static int getPriorityFromArray(int index){
+        return getPriority(tasks.get(index));
+    }
+
+    public static String getDir_usersFromArray(int index){
+        return getDir_users(tasks.get(index));
+    }
+
+    public static int getGroupsFromArray(int index){
+        return getGroups(tasks.get(index));
+    }
+
+    public static boolean getStavFromArray(int index){
+        return getStav(tasks.get(index));
     }
 
     public static void addTask(){
@@ -44,17 +97,16 @@ public class Task {
                 PreparedStatement dotaz = conn.prepareStatement("SELECT * FROM Tasks");
                 ResultSet vysledky = dotaz.executeQuery();
                     while (vysledky.next()) {
-                        int ID_g = vysledky.getInt(1);
-                        String name_g = vysledky.getString(2);
-                        String desc_g = vysledky.getString(3);
-                        String sh_desc_g = vysledky.getString(4);
-                        System.out.println(name_g);
-                        Date deadline_g = vysledky.getDate(5);
-                        int priority_g = vysledky.getInt(6);
-                        String dir_users_g = vysledky.getString(7);
-                        int groups_g = vysledky.getInt(8);
-                        boolean stav_g = vysledky.getBoolean(9);
-                        tasks.add(new Task(ID_g,name_g,desc_g,sh_desc_g,deadline_g,priority_g,dir_users_g,groups_g,stav_g));
+                        ID = vysledky.getInt(1);
+                        name = vysledky.getString(2);
+                        System.out.println(name);
+                        desc = vysledky.getString(3);
+                        deadline = vysledky.getDate(5);
+                        priority = vysledky.getInt(6);
+                        dir_users = vysledky.getString(7);
+                        groups = vysledky.getInt(8);
+                        stav = vysledky.getBoolean(9);
+                        tasks.add(new Task(ID,name,desc,deadline,priority,dir_users,groups,stav));
                     }
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
@@ -62,10 +114,6 @@ public class Task {
 
 
     }
-    public static String getNameFromArray(int index){
-        return getName(tasks.get(index));
-    }
-    public static String getName(Object a){
-        return name;
-    }
+
+
 }
