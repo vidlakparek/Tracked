@@ -31,6 +31,9 @@ public class Task {
     this.groups = groups;
     this.stav = stav;
     }
+    public static String getName(Object a){
+        return name;
+    }
     public static void addTask(){
 
             try {
@@ -39,20 +42,9 @@ public class Task {
                 e.printStackTrace();
             }
             Connection conn = Controller.getConnection();
-            PreparedStatement dotaz = null;
             try {
-                dotaz = conn.prepareStatement("SELECT * FROM Tasks");
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-            ResultSet vysledky = null;
-            try {
-                vysledky = dotaz.executeQuery();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-
-                try {
+                PreparedStatement dotaz = conn.prepareStatement("SELECT * FROM Tasks");
+                ResultSet vysledky = dotaz.executeQuery();
                     if (!vysledky.next()) {
                         ID = vysledky.getInt(1);
                         name = vysledky.getString(2);
@@ -70,5 +62,9 @@ public class Task {
                 }
 
 
+    }
+    public static void getNameFromArray(int index){
+
+        System.out.println(getName(tasks.get(index)));
     }
 }
