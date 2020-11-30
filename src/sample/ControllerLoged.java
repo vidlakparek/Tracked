@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
@@ -17,11 +18,12 @@ public class ControllerLoged {
 
 
     public Pane task;
+    public Label name;
     int color;
 
    // @Override
     public void initialize(ActionEvent actionEvent){
-
+        name.setText(Task.name);
         task.setStyle("-fx-background-color: #"+color+"");
 
     }
@@ -46,8 +48,8 @@ public class ControllerLoged {
             okno.show();
         }
 
-    public void add_task(ActionEvent event) {
-        /* Vyskočení dialogového okna, do kterého uživatel zadá aparametery pro vytvřoení nového tasku*/
+    public void add_task(ActionEvent event) throws IOException {
+        CreateTask.create();
     }
 
     public void refresh(ActionEvent event) {
