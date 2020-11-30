@@ -21,7 +21,7 @@ public class ControllerLoged {
     public Label name;
     int color;
 
-   // @Override
+    //@Override
     public void initialize(ActionEvent actionEvent){
         name.setText(Task.name);
         task.setStyle("-fx-background-color: #"+color+"");
@@ -46,6 +46,8 @@ public class ControllerLoged {
             okno.setScene(loged);
             okno.setTitle("Tracked - přihlašování");
             okno.show();
+            Task.addTask();
+            Task.getNameFromArray(0);
         }
 
     public void add_task(ActionEvent event) throws IOException {
