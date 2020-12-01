@@ -15,6 +15,22 @@
 -fx-text-fill: #2196f3;
 -fx-font-size: 15px;
 }
+
+#closeButt{
+    -fx-text-fill: #2196f3;
+    -fx-font-size: 15px;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-background-radius:  100px;
+}
+#closeButt:hover{
+ -fx-background-color: #DC143C;
+ -fx-text-fill: #ffffff;
+
+}
+
 .choiceBox{
  -fx-background-color: #2196f3;
  -fx-border-color:#ffffff;
@@ -24,6 +40,13 @@
  -fx-content-display: LEFT;
 }
 
+.choiceBox .list-cell:selected{
+    -fx-text-fill: #ffffff;
+}
+
+.choiceBox .list-view{
+-fx-background-color: #2196f3;
+-fx-text-fill: #ffffff;
 }
 #save{
  -fx-background-color: #2196f3;

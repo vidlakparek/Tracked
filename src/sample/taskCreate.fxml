@@ -21,5 +21,6 @@
       <ComboBox fx:id="priorita" layoutX="220.0" layoutY="318.0" prefWidth="150.0" styleClass="choiceBox" stylesheets="@createTask.css" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="320.0" />
       <ComboBox fx:id="group" layoutX="230.0" layoutY="328.0" prefWidth="150.0" styleClass="choiceBox" stylesheets="@createTask.css" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="370.0" />
       <TextArea layoutX="83.0" layoutY="143.0" prefHeight="90.0" prefWidth="282.0" AnchorPane.bottomAnchor="270.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="145.0" />
+      <Button id="closeButt" fx:id="closeButton" layoutX="337.0" layoutY="19.0" mnemonicParsing="false" onAction="#close" stylesheets="@createTask.css" text="×" />
    </children>
 </AnchorPane>

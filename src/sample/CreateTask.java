@@ -1,9 +1,11 @@
 package sample;
 
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -14,6 +16,7 @@ import java.io.IOException;
 public class CreateTask {
     public ComboBox priorita;
     public ComboBox group;
+    public Button closeButton;
 
     public static void create() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(CreateTask.class.getResource("taskCreate.fxml"));
@@ -33,5 +36,10 @@ public class CreateTask {
         group.getItems().removeAll(group.getItems());
         group.getItems().addAll("Úklid", "Vývoj", "Administrativa");
 
+    }
+
+    public void close(ActionEvent event) {
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
     }
 }
