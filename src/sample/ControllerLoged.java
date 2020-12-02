@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -17,19 +18,21 @@ import java.io.IOException;
 public class ControllerLoged {
 
 
-    public Pane task;
-    public Label name;
+    public Label namee[];
+    public Label datumm[];
+    public AnchorPane arPane;
+    public Pane tas[];
 
 
-
-    public void initialize(){
+    /*public void initialize(){
         Task.addTask();
-        /*for(int i = 0;i<Task.getLength();i++) {
-            task[i] = new Pane();
-            name[i] = new Label();*/
-            name.setText(Task.getNameFromArray(0));
-        //}
-    }
+            
+        for(int i = 0;i<Task.getLength();i++) {
+            arPane.getChildren().add(tas[i] = new Pane());
+            tas[i].getChildren().add(namee[i] = new Label(Task.getNameFromArray(i)));
+            tas[i].getChildren().add(datumm[i] = new Label(String.valueOf(Task.getDeadlineFromArray(i))));
+        }
+    }*/
     public void log_out(ActionEvent event) {
 
         try {
