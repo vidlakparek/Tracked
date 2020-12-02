@@ -7,9 +7,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -22,17 +24,21 @@ public class ControllerLoged {
     public Label datumm[];
     public AnchorPane arPane;
     public Pane tas[];
+    public GridPane gridPane;
+    public ScrollPane scrollPane;
 
 
-    /*public void initialize(){
+    public void initialize(){
         Task.addTask();
             
         for(int i = 0;i<Task.getLength();i++) {
-            arPane.getChildren().add(tas[i] = new Pane());
+            tas[i] = new Pane();
+            gridPane.getChildren().add(tas[i]);
             tas[i].getChildren().add(namee[i] = new Label(Task.getNameFromArray(i)));
             tas[i].getChildren().add(datumm[i] = new Label(String.valueOf(Task.getDeadlineFromArray(i))));
+            scrollPane.getChildrenUnmodifiable().add(gridPane);
         }
-    }*/
+    }
     public void log_out(ActionEvent event) {
 
         try {
