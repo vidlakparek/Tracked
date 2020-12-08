@@ -13,6 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -40,6 +41,8 @@ public class ControllerLoged {
             butt[i] = new Button(Task.getNameFromArray(i) +"\n" +"\n" +"\n" +"\n" + Task.getDeadlineFromArray(i));
             butt[i].setLayoutX(10);
             butt[i].setLayoutY(40 + i*100);
+            butt[i].setId("button"+i);
+            //butt[i].setBorder(new Border(new BorderStroke( BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
             //butt[i].setStyle("task.css");
             butt[i].setPrefSize(680,100);
         }
