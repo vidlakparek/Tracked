@@ -6,39 +6,49 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class ControllerLoged {
-
-
-    public Label namee[];
-    public Label datumm[];
     public AnchorPane arPane;
-    public Pane tas[];
-    public GridPane gridPane;
-    public ScrollPane scrollPane;
-
+    public ScrollPane scroll;
+    public Button butt[];
+    public FlowPane fPane;
 
     public void initialize(){
-        Task.addTask();
-            
-        for(int i = 0;i<Task.getLength();i++) {
-            tas[i] = new Pane();
-            gridPane.getChildren().add(tas[i]);
-            tas[i].getChildren().add(namee[i] = new Label(Task.getNameFromArray(i)));
-            tas[i].getChildren().add(datumm[i] = new Label(String.valueOf(Task.getDeadlineFromArray(i))));
-            scrollPane.getChildrenUnmodifiable().add(gridPane);
-        }
+        AddTasks.addTask();
+        initializeButtons();
     }
+
+    public void initializeButtons(){
+        butt = new Button[AddTasks.getLength()];
+        butt[0] = new Button("");
+        for(int i = 0;i<AddTasks.getLength();i++) {
+            System.out.println(Task.getNameFromArray(2)+Task.getDeadlineFromArray(i));
+            butt[i] = new Button(Task.getNameFromArray(i) +"\n" +"\n" +"\n" +"\n" + Task.getDeadlineFromArray(i));
+            butt[i].setLayoutX(10);
+            butt[i].setLayoutY(40 + i*100);
+            //butt[i].setStyle("task.css");
+            butt[i].setPrefSize(680,100);
+        }
+        fPane = new FlowPane();
+        fPane.getChildren().addAll(butt);
+        scroll.setContent(fPane);
+
+    }
+
     public void log_out(ActionEvent event) {
 
         try {

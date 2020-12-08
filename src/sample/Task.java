@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 public class Task {
@@ -17,7 +18,8 @@ public class Task {
     static String dir_users;
     static int groups;
     static boolean stav;
-    public static ArrayList<Task> tasks;
+
+
 
     public Task(int ID, String name, String desc, Date deadline, int priority, String dir_users, int groups, boolean stav){
     Task.ID = ID;
@@ -29,6 +31,7 @@ public class Task {
     Task.groups = groups;
     Task.stav = stav;
     }
+
     public static String getName(Object a){
         return name;
     }
@@ -45,9 +48,9 @@ public class Task {
         return priority;
     }
 
-    public static String getDir_users(Object a){
-        return dir_users;
-    }
+    public static String getDir_users(Object a){return dir_users;}
+
+    public static String getAll(Task a){return name + desc;}
 
     public static int getGroups(Object a){
         return groups;
@@ -58,64 +61,32 @@ public class Task {
     }
 
     public static String getNameFromArray(int index){
-        return getName(tasks.get(index));
+        return getName(AddTasks.tasks.get(index));
     }
 
     public static String getDescFromArray(int index){
-        return getDesc(tasks.get(index));
+        return getDesc(AddTasks.tasks.get(index));
     }
 
     public static Date getDeadlineFromArray(int index){
-        return getDeadLine(tasks.get(index));
+        return getDeadLine(AddTasks.tasks.get(index));
     }
 
     public static int getPriorityFromArray(int index){
-        return getPriority(tasks.get(index));
+        return getPriority(AddTasks.tasks.get(index));
     }
 
     public static String getDir_usersFromArray(int index){
-        return getDir_users(tasks.get(index));
+        return getDir_users(AddTasks.tasks.get(index));
     }
 
     public static int getGroupsFromArray(int index){
-        return getGroups(tasks.get(index));
+        return getGroups(AddTasks.tasks.get(index));
     }
 
     public static boolean getStavFromArray(int index){
-        return getStav(tasks.get(index));
+        return getStav(AddTasks.tasks.get(index));
     }
 
-    public static void addTask(){
-        tasks = new ArrayList<Task>();
-            try {
-                Class.forName( "com.mysql.jdbc.Driver" );
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-            Connection conn = Controller.getConnection();
-            try {
-                PreparedStatement dotaz = conn.prepareStatement("SELECT * FROM Tasks");
-                ResultSet vysledky = dotaz.executeQuery();
-                    while (vysledky.next()) {
-                        ID = vysledky.getInt(1);
-                        name = vysledky.getString(2);
-                        System.out.println(name);
-                        desc = vysledky.getString(3);
-                        deadline = vysledky.getDate(4);
-                        priority = vysledky.getInt(5);
-                        dir_users = vysledky.getString(6);
-                        groups = vysledky.getInt(7);
-                        stav = vysledky.getBoolean(8);
-                        tasks.add(new Task(ID,name,desc,deadline,priority,dir_users,groups,stav));
-                    }
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-
-
-    }
-
-    public static int getLength(){
-        return tasks.size();
-    }
+    public static String getAllfromArray(int index){return getAll(AddTasks.tasks.get(index));}
 }
