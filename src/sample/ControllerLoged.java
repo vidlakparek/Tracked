@@ -21,12 +21,24 @@ import java.util.Date;
 
 
 public class ControllerLoged {
+    int ID = 0;
+    String name = null;
+    String desc = null;
+    Date deadline = null;
+    int priority = 0;
+    String dir_users = null;
+    String groups = null;
+    boolean stav = false;
+
+    boolean clear = false;
+
     public AnchorPane arPane;
     public ScrollPane scroll;
     public Button butt[];
     public FlowPane fPane;
     public Label timeLabel;
     public Task ukoly[];
+
 
 
     public void initialize(){
@@ -59,14 +71,6 @@ public class ControllerLoged {
 
     public void addTasks(){
         ukoly[0]= new Task(0,null,null,null,0,null,null,false);
-        int DID = 0;
-        String Dname = null;
-        String Ddesc = null;
-        Date Ddeadline = null;
-        int Dpriority = 0;
-        String Ddir_users = null;
-        String Dgroups = null;
-        boolean Dstav = false;
         try {
             Class.forName( "com.mysql.jdbc.Driver" );
         } catch (ClassNotFoundException e) {
@@ -79,16 +83,15 @@ public class ControllerLoged {
 
             int i = 0;
             while (vysledky.next()) {
-                DID = vysledky.getInt(1);
-                Dname = vysledky.getString(2);
-                System.out.println(Dname);
-                Ddesc = vysledky.getString(3);
-                Ddeadline = vysledky.getDate(4);
-                Dpriority = vysledky.getInt(5);
-                Ddir_users = vysledky.getString(6);
-                Dgroups = vysledky.getString(7);
-                Dstav = vysledky.getBoolean(8);
-                ukoly[i] = new Task(DID,Dname,Ddesc,Ddeadline,Dpriority,Ddir_users,Dgroups,Dstav);
+                ID = vysledky.getInt(1);
+                name = vysledky.getString(2);
+                desc = vysledky.getString(3);
+                deadline = vysledky.getDate(4);
+                priority = vysledky.getInt(5);
+                dir_users = vysledky.getString(6);
+                groups = vysledky.getString(7);
+                stav = vysledky.getBoolean(8);
+                ukoly[i] = new Task(ID,name,desc,deadline,priority,dir_users,groups,stav);
                 i++;
 
             }
@@ -111,6 +114,7 @@ public class ControllerLoged {
             //butt[i].setStyle("task.css");
             butt[i].setPrefSize(680,100);
         }
+        if(clear)clear_done();
         fPane = new FlowPane();
         fPane.getChildren().addAll(butt);
         scroll.setContent(fPane);
@@ -150,12 +154,21 @@ public class ControllerLoged {
         /*Aktualizace seznamu tasks, stejně jako při stisknutí klávesy F5*/
     }
 
-    public void clear_done(ActionEvent event) {
+    public void clear_done() {
+        for(int i =0;i<ukoly.length;i++){
+            if(ukoly[i].getStav())butt[i].setText("Splněno");
+        }
+        clear = true;
         /* Skryje tasks, které jsou již dokončeny.*/
     }
 
     public void sort(ActionEvent event) {
         /*Seřadí tasks podle toho, která možnost byla zvolena.*/
+    }
+
+    public void show_all(ActionEvent event){
+        clear = false;
+        refresh(event);
     }
 }
 
