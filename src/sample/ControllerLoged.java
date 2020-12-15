@@ -16,8 +16,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 
 
 public class ControllerLoged {
@@ -29,7 +28,7 @@ public class ControllerLoged {
     String dir_users = null;
     String groups = null;
     boolean stav = false;
-
+    ArrayList<Task> arrayTask;
     boolean clear = false;
 
     public AnchorPane arPane;
@@ -37,12 +36,10 @@ public class ControllerLoged {
     public Button butt[];
     public FlowPane fPane;
     public Label timeLabel;
-    public Task ukoly[];
 
 
 
     public void initialize(){
-        createUkoly();
         addTasks();
         initializeButtons();
 
@@ -50,27 +47,9 @@ public class ControllerLoged {
 
 
 
-    public void createUkoly(){
-        try {
-            Class.forName( "com.mysql.jdbc.Driver" );
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        Connection conn = Controller.getConnection();
-        try {
-            PreparedStatement dotaz = conn.prepareStatement("SELECT * FROM Tasks");
-            ResultSet vysledky = dotaz.executeQuery();
-            int i = 0;
-            while (vysledky.next()){i++;}
-            ukoly = new Task[i];
-
-        } catch (SQLException throwables) {
-        throwables.printStackTrace();
-        }
-    }
-
     public void addTasks(){
-        ukoly[0]= new Task(0,null,null,null,0,null,null,false);
+        arrayTask = new ArrayList<Task>();
+
         try {
             Class.forName( "com.mysql.jdbc.Driver" );
         } catch (ClassNotFoundException e) {
@@ -91,7 +70,7 @@ public class ControllerLoged {
                 dir_users = vysledky.getString(6);
                 groups = vysledky.getString(7);
                 stav = vysledky.getBoolean(8);
-                ukoly[i] = new Task(ID,name,desc,deadline,priority,dir_users,groups,stav);
+                arrayTask.add(i,new Task(ID,name,desc,deadline,priority,dir_users,groups,stav));
                 i++;
 
             }
@@ -99,14 +78,15 @@ public class ControllerLoged {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
     }
 
     public void initializeButtons(){
-        butt = new Button[ukoly.length];
+        butt = new Button[arrayTask.size()];
         butt[0] = new Button("");
-        for(int i = 0;i< ukoly.length;i++) {
-            System.out.println(ukoly[i].getName()+ukoly[i].getDeadlline());
-            butt[i] = new Button(ukoly[i].getName()+ "\n"+"\n"+"\n"+"\n"+ukoly[i].getDeadlline());
+        for(int i = 0;i< arrayTask.size();i++) {
+            System.out.println(arrayTask.get(i).getName()+arrayTask.get(i).getDeadlline());
+            butt[i] = new Button(arrayTask.get(i).getName()+ "\n"+"\n"+"\n"+"\n"+arrayTask.get(i).getDeadlline());
             butt[i].setLayoutX(10);
             butt[i].setLayoutY(40 + i*100);
             butt[i].setId("button"+i);
@@ -148,22 +128,44 @@ public class ControllerLoged {
     }
 
     public void refresh(ActionEvent event) {
-        createUkoly();
-        addTasks();
-        initializeButtons();
+        if(clear){
+            addTasks();
+            clear_done();
+            initializeButtons();
+        }
+        else{
+            addTasks();
+            initializeButtons();
+        }
         /*Aktualizace seznamu tasks, stejně jako při stisknutí klávesy F5*/
     }
 
     public void clear_done() {
-        for(int i =0;i<ukoly.length;i++){
-            if(ukoly[i].getStav())butt[i].setText("Splněno");
+        for(int i =0;i<arrayTask.size();i++){
+            if(arrayTask.get(i).getStav()) {
+                arrayTask.remove(i);
+                i--;
+            }
         }
+        initializeButtons();
         clear = true;
         /* Skryje tasks, které jsou již dokončeny.*/
     }
 
-    public void sort(ActionEvent event) {
-        /*Seřadí tasks podle toho, která možnost byla zvolena.*/
+    public void sort_by_name(ActionEvent event) {
+        Collections.sort(arrayTask, Comparator.comparing(Task::getName));
+        initializeButtons();
+    }
+
+    public void sort_by_priority(ActionEvent event) {
+        Collections.sort(arrayTask, Comparator.comparing(Task::getPriority));
+        Collections.reverse(arrayTask);
+        initializeButtons();
+    }
+
+    public void sort_by_deadline(ActionEvent event) {
+        Collections.sort(arrayTask, Comparator.comparing(Task::getDeadlline));
+        initializeButtons();
     }
 
     public void show_all(ActionEvent event){
