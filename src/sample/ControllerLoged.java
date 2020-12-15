@@ -5,9 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -29,13 +27,16 @@ public class ControllerLoged {
     String groups = null;
     boolean stav = false;
     ArrayList<Task> arrayTask;
-    boolean clear = false;
 
     public AnchorPane arPane;
     public ScrollPane scroll;
+    public Label timeLabel;
+    public CheckMenuItem clearDone;
+    public CheckMenuItem sortByName;
+    public CheckMenuItem sortByPriority;
+    public CheckMenuItem sortByDeadline;
     public Button butt[];
     public FlowPane fPane;
-    public Label timeLabel;
 
 
 
@@ -90,11 +91,10 @@ public class ControllerLoged {
             butt[i].setLayoutX(10);
             butt[i].setLayoutY(40 + i*100);
             butt[i].setId("button"+i);
-            //butt[i].setBorder(new Border(new BorderStroke( BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
             //butt[i].setStyle("task.css");
             butt[i].setPrefSize(680,100);
+
         }
-        if(clear)clear_done();
         fPane = new FlowPane();
         fPane.getChildren().addAll(butt);
         scroll.setContent(fPane);
@@ -127,50 +127,109 @@ public class ControllerLoged {
         CreateTask.create();
     }
 
-    public void refresh(ActionEvent event) {
-        if(clear){
-            addTasks();
-            clear_done();
-            initializeButtons();
+    public void refresh() {
+        if(clearDone.isSelected()){
+            if (sortByName.isSelected()) {
+                addTasks();
+                clear_done();
+                sort_by_name();
+            } else if (sortByPriority.isSelected()) {
+                addTasks();
+                clear_done();
+                sort_by_priority();
+            } else if (sortByDeadline.isSelected()) {
+                addTasks();
+                clear_done();
+                sort_by_deadline();
+            }
+            else {
+                addTasks();
+                clear_done();
+                initializeButtons();
+            }
         }
-        else{
-            addTasks();
-            initializeButtons();
+        else {
+            if (sortByName.isSelected()) {
+                addTasks();
+                sort_by_name();
+            } else if (sortByPriority.isSelected()) {
+                addTasks();
+                sort_by_priority();
+            } else if (sortByDeadline.isSelected()) {
+                addTasks();
+                sort_by_deadline();
+            }
+            else {
+                addTasks();
+                initializeButtons();
+            }
         }
         /*Aktualizace seznamu tasks, stejně jako při stisknutí klávesy F5*/
     }
 
     public void clear_done() {
-        for(int i =0;i<arrayTask.size();i++){
-            if(arrayTask.get(i).getStav()) {
-                arrayTask.remove(i);
-                i--;
+        if(clearDone.isSelected()){
+            for(int i =0;i<arrayTask.size();i++) {
+                if (arrayTask.get(i).getStav()) {
+                    arrayTask.remove(i);
+                    i--;
+                }
+                initializeButtons();
             }
         }
-        initializeButtons();
-        clear = true;
+        else refresh();
+
         /* Skryje tasks, které jsou již dokončeny.*/
     }
 
-    public void sort_by_name(ActionEvent event) {
+    public void sort_by_name() {
+        sortByPriority.setSelected(false);
+        sortByDeadline.setSelected(false);
         Collections.sort(arrayTask, Comparator.comparing(Task::getName));
         initializeButtons();
     }
 
-    public void sort_by_priority(ActionEvent event) {
-        Collections.sort(arrayTask, Comparator.comparing(Task::getPriority));
+    public void sort_by_priority() {
+        sortByName.setSelected(false);
+        sortByDeadline.setSelected(false);
+        Collections.sort(arrayTask, comparatorPriority);
         Collections.reverse(arrayTask);
         initializeButtons();
     }
 
-    public void sort_by_deadline(ActionEvent event) {
-        Collections.sort(arrayTask, Comparator.comparing(Task::getDeadlline));
+    public void sort_by_deadline() {
+        sortByName.setSelected(false);
+        sortByPriority.setSelected(false);
+        Collections.sort(arrayTask, comparatorDeadline);
         initializeButtons();
     }
 
-    public void show_all(ActionEvent event){
-        clear = false;
-        refresh(event);
+
+    Comparator<Task> comparatorPriority = new Comparator<Task>(){
+        @Override
+        public int compare(final Task o1, final Task o2){
+            if(o1.getPriority()!=o2.getPriority()){
+                return Integer.compare(o1.getPriority(),o2.getPriority());
+            }else{
+                return o1.getName().compareTo(o2.getName());
+            }
+        }
+    };
+
+    Comparator<Task> comparatorDeadline = new Comparator<Task>(){
+        @Override
+        public int compare(final Task o1, final Task o2){
+            if(!o1.getDeadlline().equals(o2.getDeadlline())){
+                return o1.getDeadlline().compareTo(o2.getDeadlline());
+            }else{
+                return o1.getName().compareTo(o2.getName());
+            }
+        }
+    };
+
+    public void show(){
+
     }
+
 }
 

@@ -15,15 +15,14 @@
         <menus>
           <Menu mnemonicParsing="false" text="Řazení">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#sort" text="Podle názvu" />
-                  <MenuItem mnemonicParsing="false" onAction="#sort" text="Podle priority" />
-                  <MenuItem mnemonicParsing="false" onAction="#sort" text="Podle deadline" />
+                  <CheckMenuItem fx:id="sortByName" mnemonicParsing="false" onAction="#sort_by_name" text="Podle názvu" />
+                  <CheckMenuItem fx:id="sortByPriority" mnemonicParsing="false" onAction="#sort_by_priority" text="Podle priority" />
+                  <CheckMenuItem fx:id="sortByDeadline" mnemonicParsing="false" onAction="#sort_by_deadline" text="Podle deadline" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Akce">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#clear_done" text="Skrýt hotové" />
-                  <CheckMenuItem mnemonicParsing="false" onAction="#show_all" text="Zobrazit vše" />
+                  <CheckMenuItem fx:id="clearDone" mnemonicParsing="false" onAction="#clear_done" text="Skrýt hotové" />
                   <MenuItem mnemonicParsing="false" onAction="#add_task" text="Přidat úkol" />
                   <MenuItem mnemonicParsing="false" onAction="#refresh" text="Aktualizovat stránku" />
             </items>
