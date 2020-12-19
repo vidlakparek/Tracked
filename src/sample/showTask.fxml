@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ShowTask">
+   <children>
+      <Label fx:id="idAndName" layoutX="34.0" layoutY="27.0" text="Label" />
+      <TextArea fx:id="popis" editable="false" layoutX="24.0" layoutY="66.0" prefHeight="200.0" prefWidth="200.0" />
+      <Label fx:id="deadline" layoutX="34.0" layoutY="324.0" text="Label" />
+      <Label fx:id="priorita" layoutX="384.0" layoutY="27.0" text="Label" />
+      <Label fx:id="group" layoutX="384.0" layoutY="90.0" text="Label" />
+      <Label fx:id="stav" layoutX="518.0" layoutY="333.0" text="Label" />
+      <Label layoutX="474.0" layoutY="333.0" text="Label" />
+      <Button fx:id="closeButton" layoutX="655.0" layoutY="14.0" mnemonicParsing="false" onAction="#close" text="X" />
+   </children>
+</AnchorPane>

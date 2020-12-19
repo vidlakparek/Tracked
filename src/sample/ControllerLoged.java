@@ -1,6 +1,10 @@
 package sample;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -8,13 +12,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.*;
+import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 
 public class ControllerLoged {
@@ -27,6 +33,7 @@ public class ControllerLoged {
     String groups = null;
     boolean stav = false;
     ArrayList<Task> arrayTask;
+    static ArrayList<Task> staticArrayTask;
 
     public AnchorPane arPane;
     public ScrollPane scroll;
@@ -41,16 +48,25 @@ public class ControllerLoged {
 
 
     public void initialize(){
+        initClock();
         addTasks();
         initializeButtons();
 
     }
 
+    public void initClock() {
 
+        Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd. MMMM HH:mm");
+            timeLabel.setText(LocalDateTime.now().format(formatter));
+        }), new KeyFrame(Duration.seconds(1)));
+        clock.setCycleCount(Animation.INDEFINITE);
+        clock.play();
+    }
 
     public void addTasks(){
         arrayTask = new ArrayList<Task>();
-
+        staticArrayTask = new ArrayList<Task>();
         try {
             Class.forName( "com.mysql.jdbc.Driver" );
         } catch (ClassNotFoundException e) {
@@ -75,6 +91,7 @@ public class ControllerLoged {
                 i++;
 
             }
+            staticArrayTask = arrayTask;
             dotaz.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -84,16 +101,25 @@ public class ControllerLoged {
 
     public void initializeButtons(){
         butt = new Button[arrayTask.size()];
-        butt[0] = new Button("");
         for(int i = 0;i< arrayTask.size();i++) {
             System.out.println(arrayTask.get(i).getName()+arrayTask.get(i).getDeadlline());
             butt[i] = new Button(arrayTask.get(i).getName()+ "\n"+"\n"+"\n"+"\n"+arrayTask.get(i).getDeadlline());
             butt[i].setLayoutX(10);
             butt[i].setLayoutY(40 + i*100);
-            butt[i].setId("button"+i);
+            butt[i].setId(String.valueOf(i));
             //butt[i].setStyle("task.css");
             butt[i].setPrefSize(680,100);
+            butt[i].setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    try {
 
+                        show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
         }
         fPane = new FlowPane();
         fPane.getChildren().addAll(butt);
@@ -227,8 +253,21 @@ public class ControllerLoged {
         }
     };
 
-    public void show(){
+    public static int getIDFromButton(ActionEvent event){
+        Button button = (Button)event.getSource();
+        return Integer.valueOf(button.getId());
+    }
 
+    public static Task getTaskFromButton(ActionEvent event){
+        return staticArrayTask.get(getIDFromButton(event));
+    }
+
+    public static ActionEvent getActionEvent(ActionEvent event){
+        return event;
+    }
+
+    public void show() throws IOException {
+        ShowTask.create();
     }
 
 }
