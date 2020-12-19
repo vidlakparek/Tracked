@@ -23,31 +23,33 @@ public class ShowTask {
     public Label group;
     public Label stav;
     public Button closeButton;
+    protected static int ID;
 
-    Task task;
 
 
-    public void initialize(){
-
-        idAndName.setText(String.valueOf(task.getID()) +". "+task.getName());
+   public void initialize(){
+       idAndName.setText("#"+ControllerLoged.arrayTask.get(ID).getID()+" "+ControllerLoged.arrayTask.get(ID).getName());
+       popis.setText(ControllerLoged.arrayTask.get(ID).getDesc());
+       deadline.setText(ControllerLoged.arrayTask.get(ID).getDeadlline()+"");
+       priorita.setText(ControllerLoged.arrayTask.get(ID).getPriority()+"");
+       group.setText(ControllerLoged.arrayTask.get(ID).getGroups());
+       stav.setText(ControllerLoged.arrayTask.get(ID).getStav()+"");
     }
 
-    /*public void getTask(){
-        task = ControllerLoged.getTaskFromButton(event);
-    }*/
 
 
-    public static void create() throws IOException {
+    public static void create(int i) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(CreateTask.class.getResource("showTask.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
-        Scene scena = new Scene(root1,700,500);
+        Scene scena = new Scene(root1,400,500);
         scena.setFill(Color.TRANSPARENT);
         stage.setScene(scena);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
-
+        ID = i;
     }
+
 
     public void close() {
         Stage stage = (Stage) closeButton.getScene().getWindow();

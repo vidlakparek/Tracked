@@ -32,7 +32,7 @@ public class ControllerLoged {
     String dir_users = null;
     String groups = null;
     boolean stav = false;
-    ArrayList<Task> arrayTask;
+     protected static ArrayList<Task> arrayTask;
     static ArrayList<Task> staticArrayTask;
 
     public AnchorPane arPane;
@@ -109,16 +109,14 @@ public class ControllerLoged {
             butt[i].setId(String.valueOf(i));
             //butt[i].setStyle("task.css");
             butt[i].setPrefSize(680,100);
-            butt[i].setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    try {
-
-                        show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+            int finalI = i;
+            butt[i].setOnAction(event -> {
+                try {
+                    ShowTask.create(finalI);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
+
             });
         }
         fPane = new FlowPane();
@@ -253,22 +251,6 @@ public class ControllerLoged {
         }
     };
 
-    public static int getIDFromButton(ActionEvent event){
-        Button button = (Button)event.getSource();
-        return Integer.valueOf(button.getId());
-    }
-
-    public static Task getTaskFromButton(ActionEvent event){
-        return staticArrayTask.get(getIDFromButton(event));
-    }
-
-    public static ActionEvent getActionEvent(ActionEvent event){
-        return event;
-    }
-
-    public void show() throws IOException {
-        ShowTask.create();
-    }
 
 }
 
