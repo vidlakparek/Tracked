@@ -8,20 +8,20 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="pane" prefHeight="500.0" prefWidth="400.0" stylesheets="@createTask.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CreateTask">
+<AnchorPane id="pane" prefHeight="500.0" prefWidth="400.0" stylesheets="@../CSS/createTask.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CreateTask">
    <children>
-      <Label layoutX="33.0" layoutY="37.0" stylesheets="@createTask.css" text="Název" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="35.0" />
+      <Label layoutX="33.0" layoutY="37.0" stylesheets="@../CSS/createTask.css" text="Název" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="35.0" />
       <TextField fx:id="name" layoutX="33.0" layoutY="67.0" prefHeight="42.0" prefWidth="331.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="65.0" />
-      <Label layoutX="33.0" layoutY="119.0" stylesheets="@createTask.css" text="Popisek" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="115.0" />
+      <Label layoutX="33.0" layoutY="119.0" stylesheets="@../CSS/createTask.css" text="Popisek" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="115.0" />
       <TextArea fx:id="popis" layoutX="83.0" layoutY="143.0" prefHeight="90.0" prefWidth="282.0" AnchorPane.bottomAnchor="270.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="145.0" />
-      <Label layoutX="33.0" layoutY="246.0" stylesheets="@createTask.css" text="Deadline" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="240.0" />
-      <DatePicker fx:id="deadline" layoutX="33.0" layoutY="273.0" prefHeight="26.0" prefWidth="331.0" stylesheets="@createTask.css" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="270.0" />
-      <Label layoutX="35.0" layoutY="326.0" stylesheets="@createTask.css" text="Priorita" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="320.0" />
-      <ComboBox fx:id="priorita" layoutX="220.0" layoutY="318.0" prefWidth="150.0" styleClass="choiceBox" stylesheets="@createTask.css" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="320.0" />
-      <Label layoutX="36.0" layoutY="375.0" stylesheets="@createTask.css" text="Skupina" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="370.0" />
-      <ComboBox fx:id="group" layoutX="230.0" layoutY="328.0" prefWidth="150.0" styleClass="choiceBox" stylesheets="@createTask.css" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="370.0" />
-      <Button id="save" layoutX="251.0" layoutY="521.0" mnemonicParsing="false" onAction="#addNewTask" prefHeight="42.0" prefWidth="86.0" stylesheets="@createTask.css" text="Uložit" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="62.60000000000002" AnchorPane.topAnchor="420.0" />
-      <Button id="closeButt" fx:id="closeButton" layoutX="337.0" layoutY="19.0" mnemonicParsing="false" onAction="#close" stylesheets="@createTask.css" text="×" />
+      <Label layoutX="33.0" layoutY="246.0" stylesheets="@../CSS/createTask.css" text="Deadline" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="240.0" />
+      <DatePicker fx:id="deadline" layoutX="33.0" layoutY="273.0" prefHeight="26.0" prefWidth="331.0" stylesheets="@../CSS/createTask.css" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="270.0" />
+      <Label layoutX="35.0" layoutY="326.0" stylesheets="@../CSS/createTask.css" text="Priorita" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="320.0" />
+      <ComboBox fx:id="priorita" layoutX="220.0" layoutY="318.0" prefWidth="150.0" styleClass="choiceBox" stylesheets="@../CSS/createTask.css" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="320.0" />
+      <Label layoutX="36.0" layoutY="375.0" stylesheets="@../CSS/createTask.css" text="Skupina" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="370.0" />
+      <ComboBox fx:id="group" layoutX="230.0" layoutY="328.0" prefWidth="150.0" styleClass="choiceBox" stylesheets="@../CSS/createTask.css" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="370.0" />
+      <Button id="save" layoutX="251.0" layoutY="521.0" mnemonicParsing="false" onAction="#addNewTask" prefHeight="42.0" prefWidth="86.0" stylesheets="@../CSS/createTask.css" text="Uložit" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="62.60000000000002" AnchorPane.topAnchor="420.0" />
+      <Button id="closeButt" fx:id="closeButton" layoutX="337.0" layoutY="19.0" mnemonicParsing="false" onAction="#close" stylesheets="@../CSS/createTask.css" text="×" />
       <Label fx:id="wrong" layoutX="42.0" layoutY="436.0" visible="false" />
    </children>
 </AnchorPane>
