@@ -24,7 +24,7 @@ public class ShowTask {
     public Label stav;
     public Button closeButton;
     protected static int ID;
-
+    protected static Scene scena;
 
 
    public void initialize(){
@@ -42,7 +42,7 @@ public class ShowTask {
         FXMLLoader fxmlLoader = new FXMLLoader(CreateTask.class.getResource("showTask.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
-        Scene scena = new Scene(root1,400,500);
+        scena = new Scene(root1,400,500);
         scena.setFill(Color.TRANSPARENT);
         stage.setScene(scena);
         stage.initStyle(StageStyle.TRANSPARENT);
