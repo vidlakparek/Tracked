@@ -67,4 +67,8 @@ public class Controller {
     public static Connection getConnection(){
         return pripojeni;
     }
+
+    public void onEnter(ActionEvent ae){
+        System.out.println("test") ;
+    }
 }

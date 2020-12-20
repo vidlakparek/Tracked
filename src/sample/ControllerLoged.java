@@ -32,7 +32,7 @@ public class ControllerLoged {
     String dir_users = null;
     String groups = null;
     boolean stav = false;
-     protected static ArrayList<Task> arrayTask;
+    protected static ArrayList<Task> arrayTask;
     static ArrayList<Task> staticArrayTask;
 
     public AnchorPane arPane;
@@ -51,7 +51,6 @@ public class ControllerLoged {
         initClock();
         addTasks();
         initializeButtons();
-
     }
 
     public void initClock() {
@@ -107,7 +106,6 @@ public class ControllerLoged {
             butt[i].setLayoutX(10);
             butt[i].setLayoutY(40 + i*100);
             butt[i].setId(String.valueOf(i));
-            //butt[i].setStyle("task.css");
             butt[i].setPrefSize(680,100);
             int finalI = i;
             butt[i].setOnAction(event -> {
