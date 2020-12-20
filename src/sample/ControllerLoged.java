@@ -107,7 +107,7 @@ public class ControllerLoged {
             butt[i].setLayoutX(10);
             butt[i].setLayoutY(40 + i*100);
             butt[i].setId(String.valueOf(i));
-            //butt[i].setStyle("task.css");
+            butt[i].getStyleClass().add("style.css");
             butt[i].setPrefSize(680,100);
             int finalI = i;
             butt[i].setOnAction(event -> {
@@ -120,6 +120,7 @@ public class ControllerLoged {
             });
         }
         fPane = new FlowPane();
+
         fPane.getChildren().addAll(butt);
         scroll.setContent(fPane);
 

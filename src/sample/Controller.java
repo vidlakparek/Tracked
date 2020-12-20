@@ -29,10 +29,11 @@ public class Controller {
     public Button log_butt;
     public Label wrong_cred;
     public static Connection pripojeni = null;
+    public AnchorPane mainPane;
+
 
 
     public void login(ActionEvent actionEvent) {
-
            try {
                 Class.forName("com.mysql.jdbc.Driver");
             } catch (ClassNotFoundException e) {
