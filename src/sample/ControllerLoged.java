@@ -33,7 +33,6 @@ public class ControllerLoged {
     String groups = null;
     boolean stav = false;
     protected static ArrayList<Task> arrayTask;
-    static ArrayList<Task> staticArrayTask;
 
     public AnchorPane arPane;
     public ScrollPane scroll;
@@ -65,7 +64,6 @@ public class ControllerLoged {
 
     public void addTasks(){
         arrayTask = new ArrayList<Task>();
-        staticArrayTask = new ArrayList<Task>();
         try {
             Class.forName( "com.mysql.jdbc.Driver" );
         } catch (ClassNotFoundException e) {
@@ -90,7 +88,6 @@ public class ControllerLoged {
                 i++;
 
             }
-            staticArrayTask = arrayTask;
             dotaz.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
