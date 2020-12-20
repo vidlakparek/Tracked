@@ -26,14 +26,21 @@ public class ShowTask {
     protected static int ID;
     protected static Scene scena;
 
+    public ShowTask(){
 
-   public void initialize(){
-       idAndName.setText("#"+ControllerLoged.arrayTask.get(ID).getID()+" "+ControllerLoged.arrayTask.get(ID).getName());
-       popis.setText(ControllerLoged.arrayTask.get(ID).getDesc());
-       deadline.setText(ControllerLoged.arrayTask.get(ID).getDeadlline()+"");
-       priorita.setText(ControllerLoged.arrayTask.get(ID).getPriority()+"");
-       group.setText(ControllerLoged.arrayTask.get(ID).getGroups());
-       stav.setText(ControllerLoged.arrayTask.get(ID).getStav()+"");
+    }
+
+   public void initialize()throws IOException{
+       refresh();
+    }
+
+    public void refresh(){
+        idAndName.setText("#"+ControllerLoged.arrayTask.get(ID).getID()+" "+ControllerLoged.arrayTask.get(ID).getName());
+        popis.setText(ControllerLoged.arrayTask.get(ID).getDesc());
+        deadline.setText(ControllerLoged.arrayTask.get(ID).getDeadlline()+"");
+        priorita.setText(ControllerLoged.arrayTask.get(ID).getPriority()+"");
+        group.setText(ControllerLoged.arrayTask.get(ID).getGroups());
+        stav.setText(ControllerLoged.arrayTask.get(ID).getStav()+"");
     }
 
 

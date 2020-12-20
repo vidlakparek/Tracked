@@ -105,7 +105,7 @@ public class ControllerLoged {
             butt[i] = new Button(arrayTask.get(i).getName()+ "\n"+"\n"+"\n"+"\n"+arrayTask.get(i).getDeadlline());
             butt[i].setLayoutX(10);
             butt[i].setLayoutY(40 + i*100);
-            butt[i].setId(String.valueOf(i));
+            butt[i].setId("button");
             butt[i].setPrefSize(680,100);
             int finalI = i;
             butt[i].setOnAction(event -> {

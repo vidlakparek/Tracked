@@ -11,7 +11,7 @@
 
 <AnchorPane fx:id="arPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerLoged">
    <children>
-      <MenuBar layoutX="-6.0" layoutY="2.0" prefHeight="26.0" prefWidth="466.0" stylesheets="@style.css" AnchorPane.leftAnchor="-6.0" AnchorPane.topAnchor="0.0">
+      <MenuBar layoutX="-6.0" layoutY="2.0" prefHeight="26.0" prefWidth="466.0" stylesheets="@../CSS/style.css" AnchorPane.leftAnchor="-6.0" AnchorPane.topAnchor="0.0">
         <menus>
           <Menu mnemonicParsing="false" text="Řazení">
             <items>
@@ -30,7 +30,7 @@
         </menus>
       </MenuBar>
       <Label fx:id="timeLabel" layoutX="459.0" layoutY="-2.0" prefHeight="30.0" prefWidth="170.0" />
-      <Button id="logout" layoutX="530.0" mnemonicParsing="false" onAction="#log_out" prefHeight="25.0" prefWidth="70.0" stylesheets="@style.css" text="Log out" AnchorPane.leftAnchor="630.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <ScrollPane fx:id="scroll" layoutY="27.0" prefHeight="473.0" prefWidth="700.0" />
+      <Button id="logout" layoutX="530.0" mnemonicParsing="false" onAction="#log_out" prefHeight="25.0" prefWidth="70.0" stylesheets="@../CSS/style.css" text="Log out" AnchorPane.leftAnchor="630.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <ScrollPane fx:id="scroll" layoutY="27.0" prefHeight="473.0" prefWidth="700.0" stylesheets="@../CSS/ScrollPane.css" />
    </children>
 </AnchorPane>

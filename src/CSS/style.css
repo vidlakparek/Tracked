@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Font";
-  src: url(PathwayGothicOne-Regular.ttf);
+  src: url(../resources/PathwayGothicOne-Regular.ttf);
 }
 *{
 -fx-font-family : "Font";
