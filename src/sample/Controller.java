@@ -69,6 +69,6 @@ public class Controller {
     }
 
     public void onEnter(ActionEvent ae){
-        System.out.println("test") ;
+        login(ae);
     }
 }
