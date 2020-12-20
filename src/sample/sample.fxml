@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" onKeyPressed="#login" prefHeight="500.0" prefWidth="700.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <TextField fx:id="mail" layoutX="202.0" layoutY="250.0" onAction="#onEnter" prefHeight="40.0" prefWidth="300.0" promptText="Email" styleClass="login" stylesheets="@style.css" AnchorPane.bottomAnchor="210.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="250.0" />
       <PasswordField fx:id="pass" layoutX="200.0" layoutY="299.0" onAction="#onEnter" prefHeight="40.0" prefWidth="300.0" promptText="Password" styleClass="login" stylesheets="@style.css" AnchorPane.bottomAnchor="160.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="300.0" />
