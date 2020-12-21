@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,6 +13,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.net.IDN;
 
 
 public class ShowTask {
@@ -22,30 +24,11 @@ public class ShowTask {
     public Label priorita;
     public Label group;
     public Label stav;
+    public static int ID = 0;
     public Button closeButton;
-    protected static int ID;
     protected static Scene scena;
 
-    public ShowTask(){
-
-    }
-
-   public void initialize()throws IOException{
-       refresh();
-    }
-
-    public void refresh(){
-        idAndName.setText("#"+ControllerLoged.arrayTask.get(ID).getID()+" "+ControllerLoged.arrayTask.get(ID).getName());
-        popis.setText(ControllerLoged.arrayTask.get(ID).getDesc());
-        deadline.setText(ControllerLoged.arrayTask.get(ID).getDeadlline()+"");
-        priorita.setText(ControllerLoged.arrayTask.get(ID).getPriority()+"");
-        group.setText(ControllerLoged.arrayTask.get(ID).getGroups());
-        stav.setText(ControllerLoged.arrayTask.get(ID).getStav()+"");
-    }
-
-
-
-    public static void create(int i) throws IOException {
+    public static void create() throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(CreateTask.class.getResource("showTask.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
@@ -54,7 +37,15 @@ public class ShowTask {
         stage.setScene(scena);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
-        ID = i;
+    }
+
+    public void initialize(){
+        idAndName.setText("#"+ControllerLoged.arrayTask.get(ID).getID()+" "+ControllerLoged.arrayTask.get(ID).getName());
+        popis.setText(ControllerLoged.arrayTask.get(ID).getDesc());
+        deadline.setText(ControllerLoged.arrayTask.get(ID).getDeadlline()+"");
+        priorita.setText(ControllerLoged.arrayTask.get(ID).getPriority()+"");
+        group.setText(ControllerLoged.arrayTask.get(ID).getGroups());
+        stav.setText(ControllerLoged.arrayTask.get(ID).getStav()+"");
     }
 
 

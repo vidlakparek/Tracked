@@ -106,8 +106,9 @@ public class ControllerLoged {
             butt[i].setPrefSize(680,100);
             int finalI = i;
             butt[i].setOnAction(event -> {
+                ShowTask.ID=finalI;
                 try {
-                    ShowTask.create(finalI);
+                    ShowTask.create();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
