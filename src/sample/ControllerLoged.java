@@ -10,10 +10,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.awt.*;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -99,11 +103,11 @@ public class ControllerLoged {
         butt = new Button[arrayTask.size()];
         for(int i = 0;i< arrayTask.size();i++) {
             System.out.println(arrayTask.get(i).getName()+arrayTask.get(i).getDeadlline());
-            butt[i] = new Button(arrayTask.get(i).getName()+ "\n"+"\n"+"\n"+"\n"+arrayTask.get(i).getDeadlline());
+            butt[i] = new Button(arrayTask.get(i).getName()+ "\n"+"\n"+"\n"+arrayTask.get(i).getDeadlline());
             butt[i].setLayoutX(10);
             butt[i].setLayoutY(40 + i*100);
             butt[i].setId("button");
-            butt[i].setPrefSize(680,100);
+            butt[i].setPrefSize(600,100);
             int finalI = i;
             butt[i].setOnAction(event -> {
                 ShowTask.ID=finalI;

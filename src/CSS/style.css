@@ -49,3 +49,7 @@
 -fx-text-fill:#ffffff;
 -fx-border-radius:  0px;
 }
+#logout:hover {
+    -fx-background-color: #2196f3 !important;
+    -fx-text-fill:#ffffff
+}

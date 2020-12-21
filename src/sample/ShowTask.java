@@ -30,7 +30,7 @@ public class ShowTask {
 
     public static void create() throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(CreateTask.class.getResource("showTask.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
+        Parent root1 = fxmlLoader.load();
         Stage stage = new Stage();
         scena = new Scene(root1,400,500);
         scena.setFill(Color.TRANSPARENT);
@@ -43,12 +43,33 @@ public class ShowTask {
         idAndName.setText("#"+ControllerLoged.arrayTask.get(ID).getID()+" "+ControllerLoged.arrayTask.get(ID).getName());
         popis.setText(ControllerLoged.arrayTask.get(ID).getDesc());
         deadline.setText(ControllerLoged.arrayTask.get(ID).getDeadlline()+"");
-        priorita.setText(ControllerLoged.arrayTask.get(ID).getPriority()+"");
+        priorita.setText(prioritaText(ControllerLoged.arrayTask.get(ID).getPriority()));
         group.setText(ControllerLoged.arrayTask.get(ID).getGroups());
-        stav.setText(ControllerLoged.arrayTask.get(ID).getStav()+"");
+        stav.setText(done(ControllerLoged.arrayTask.get(ID).getStav()));
     }
 
 
+    public String prioritaText(int i){
+        switch (i) {
+            case 1:
+                return"1 - Velmi nízká";
+            case 2:
+                return"2 - Nízká";
+            case 3:
+                return"3 - Normální";
+            case 4:
+                return"4 - Vysoká";
+            case 5:
+                return"5 - Urgentní";
+
+            default:
+                return"Chyba zadání priority";
+        }
+    }
+    public String done(boolean a){
+        if (a)return"Dokončeno";
+        else return"Nedokončeno";
+    }
     public void close() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
