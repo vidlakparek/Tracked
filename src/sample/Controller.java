@@ -39,7 +39,7 @@ public class Controller {
             }
 
         try {
-            pripojeni = DriverManager.getConnection("jdbc:mysql://89.203.248.248:3306/Tracked?user="+mail.getText()+"&password="+pass.getText()+"&useSSL=false");
+            pripojeni = DriverManager.getConnection("jdbc:mysql://89.203.248.248:3306/Tracked?user="+mail.getText()+"&password="+pass.getText()+"&useUnicode=true&characterEncoding=utf8&useSSL=false");
         } catch (SQLException throwables) {
             wrong_cred.setVisible(true);
             throwables.printStackTrace();

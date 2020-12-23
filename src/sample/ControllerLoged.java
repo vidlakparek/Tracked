@@ -33,7 +33,6 @@ import java.util.Date;
 
 
 public class ControllerLoged {
-
     int ID = 0;
     String name = null;
     String desc = null;
@@ -46,6 +45,9 @@ public class ControllerLoged {
     String vyvoj="";
     String uklid="";
     String administrativa="";
+    boolean bvyvoj = false;
+    boolean buklid = false;
+    boolean badministrativa = false;
 
     public AnchorPane arPane;
     public ScrollPane scroll;
@@ -55,6 +57,7 @@ public class ControllerLoged {
     public CheckMenuItem sortByPriority;
     public CheckMenuItem sortByDeadline;
     public CheckMenuItem ukolyUzivatele;
+    public MenuItem addUkol;
     public Button butt[];
     public FlowPane fPane;
 
@@ -64,6 +67,7 @@ public class ControllerLoged {
         initClock();
         groupInitialize();
         addTasks();
+        if(!bvyvoj && !buklid && !badministrativa)addUkol.setDisable(true);
         initializeButtons();
         arPane.setOnKeyPressed(keyEvent -> {
             if(keyEvent.getCode().equals(KeyCode.F5))refresh();
@@ -97,6 +101,9 @@ public class ControllerLoged {
                     if(vysledky.getString(3).substring(0,1).equals("1"))vyvoj="Vývoj";
                     if(vysledky.getString(4).substring(0,1).equals("1"))uklid="Úklid";
                     if(vysledky.getString(5).substring(0,1).equals("1"))administrativa="Administrativa";
+                    if(vysledky.getString(3).substring(1).equals("1"))bvyvoj=true;
+                    if(vysledky.getString(4).substring(1).equals("1"))buklid=true;
+                    if(vysledky.getString(5).substring(1).equals("1"))badministrativa=true;
                 }
             }
             dotaz.close();
