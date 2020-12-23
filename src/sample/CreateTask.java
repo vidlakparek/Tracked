@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,6 +23,9 @@ public class CreateTask {
     public TextArea popis;
     public Label wrong;
     public ComboBox dirUser;
+    boolean vyvoj = false;
+    boolean uklid = false;
+    boolean administrativa = false;
 
 
     public static void create() throws IOException {
@@ -35,15 +40,40 @@ public class CreateTask {
 
     }
     public void initialize() {
-        priorita.getItems().removeAll();
+        groupInitialize();
         priorita.getItems().addAll("1- Velmi nízká", "2 - Nízká ", "3 - Normální","4 - Vysoká","5 - Urgentní");
 
-        group.getItems().removeAll();
-        group.getItems().addAll("Úklid", "Vývoj", "Administrativa");
+        if(vyvoj)group.getItems().add("Vývoj");
+        if(uklid)group.getItems().add("Úklid");
+        if(administrativa)group.getItems().add("Administrativa");
 
         dirUser.getItems().removeAll();
         dirUser.getItems().addAll(getAllUsers());
 
+    }
+
+    public void groupInitialize(){
+        try {
+            Class.forName( "com.mysql.jdbc.Driver" );
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        Connection conn = Controller.getConnection();
+        try {
+            PreparedStatement dotaz = conn.prepareStatement("SELECT * FROM Users");
+            ResultSet vysledky = dotaz.executeQuery();
+
+            while (vysledky.next()) {
+                if(vysledky.getString(2).equals(Controller.getUserName())){
+                    if(vysledky.getString(3).substring(1).equals("1"))vyvoj=true;
+                    if(vysledky.getString(4).substring(1).equals("1"))uklid=true;
+                    if(vysledky.getString(5).substring(1).equals("1"))administrativa=true;
+                }
+            }
+            dotaz.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     public ArrayList<String> getAllUsers(){
@@ -58,9 +88,9 @@ public class CreateTask {
             PreparedStatement dotaz = conn.prepareStatement("SELECT Login FROM Users");
             ResultSet vysledky = dotaz.executeQuery();
 
-            int i = 0;
+
             while (vysledky.next()) {
-                users.add(vysledky.getString(2));
+                users.add(vysledky.getString(1));
                 }
             dotaz.close();
             }

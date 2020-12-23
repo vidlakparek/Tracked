@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.paint.Color;
@@ -11,6 +12,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.sql.*;
 
 
 public class ShowTask {
@@ -21,9 +23,11 @@ public class ShowTask {
     public Label priorita;
     public Label group;
     public Label stav;
-    public static int ID = 0;
+    public CheckBox splneno;
     public Button closeButton;
+    public static int ID = 0;
     protected static Scene scena;
+
 
     public static void create() throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(CreateTask.class.getResource("showTask.fxml"));
@@ -43,7 +47,36 @@ public class ShowTask {
         priorita.setText(prioritaText(ControllerLoged.arrayTask.get(ID).getPriority()));
         group.setText(ControllerLoged.arrayTask.get(ID).getGroups());
         stav.setText(done(ControllerLoged.arrayTask.get(ID).getStav()));
+        if(ControllerLoged.arrayTask.get(ID).getStav())splneno.setSelected(true);
+        else splneno.setSelected(false);
     }
+
+    public void updateStav(){
+        String sqlUpdate = "";
+        if(splneno.isSelected()){
+            sqlUpdate = "UPDATE Tasks SET Stav = 1 WHERE ID ="+ControllerLoged.arrayTask.get(ID).getID();
+            stav.setText("Dokončeno");
+        }
+        else {
+            sqlUpdate = "UPDATE Tasks SET Stav = 0 WHERE ID ="+ControllerLoged.arrayTask.get(ID).getID();
+            stav.setText("Nedokončeno");
+        }
+        try {
+            Class.forName( "com.mysql.jdbc.Driver" );
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        Connection conn = Controller.getConnection();
+        try {
+            Statement dotaz = conn.createStatement();
+            dotaz.executeUpdate(sqlUpdate);
+            dotaz.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
+
 
 
     public String prioritaText(int i){

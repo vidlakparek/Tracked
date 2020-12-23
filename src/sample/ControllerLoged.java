@@ -4,6 +4,7 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -12,16 +13,23 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import javax.swing.text.DateFormatter;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 
 
 public class ControllerLoged {
@@ -35,7 +43,9 @@ public class ControllerLoged {
     String groups = null;
     boolean stav = false;
     protected static ArrayList<Task> arrayTask;
-    String userGroup;
+    String vyvoj="";
+    String uklid="";
+    String administrativa="";
 
     public AnchorPane arPane;
     public ScrollPane scroll;
@@ -52,8 +62,12 @@ public class ControllerLoged {
 
     public void initialize(){
         initClock();
+        groupInitialize();
         addTasks();
         initializeButtons();
+        arPane.setOnKeyPressed(keyEvent -> {
+            if(keyEvent.getCode().equals(KeyCode.F5))refresh();
+        });
     }
 
     public void initClock() {
@@ -75,11 +89,15 @@ public class ControllerLoged {
         }
         Connection conn = Controller.getConnection();
         try {
-            PreparedStatement dotaz = conn.prepareStatement("SELECT Group FROM User");
+            PreparedStatement dotaz = conn.prepareStatement("SELECT * FROM Users");
             ResultSet vysledky = dotaz.executeQuery();
 
             while (vysledky.next()) {
-
+                if(vysledky.getString(2).equals(Controller.getUserName())){
+                    if(vysledky.getString(3).substring(0,1).equals("1"))vyvoj="Vývoj";
+                    if(vysledky.getString(4).substring(0,1).equals("1"))uklid="Úklid";
+                    if(vysledky.getString(5).substring(0,1).equals("1"))administrativa="Administrativa";
+                }
             }
             dotaz.close();
         } catch (SQLException throwables) {
@@ -109,7 +127,8 @@ public class ControllerLoged {
                 dir_users = vysledky.getString(6);
                 groups = vysledky.getString(7);
                 stav = vysledky.getBoolean(8);
-                if(groups.equals(userGroup)) {
+
+                if(groups.equals(vyvoj)||groups.equals(uklid)||groups.equals(administrativa)) {
                     arrayTask.add(i, new Task(ID, name, desc, deadline, priority, dir_users, groups, stav));
                     i++;
                 }
@@ -197,7 +216,26 @@ public class ControllerLoged {
                 initializeButtons();
             }
         }
-        else {
+        else if(ukolyUzivatele.isSelected()){
+            if (sortByName.isSelected()) {
+                addTasks();
+                show_dir_userOnly();
+                sort_by_name();
+            } else if (sortByPriority.isSelected()) {
+                addTasks();
+                show_dir_userOnly();
+                sort_by_priority();
+            } else if (sortByDeadline.isSelected()) {
+                addTasks();
+                show_dir_userOnly();
+                sort_by_deadline();
+            }
+            else {
+                addTasks();
+                show_dir_userOnly();
+                initializeButtons();
+            }
+        }else {
             if (sortByName.isSelected()) {
                 addTasks();
                 sort_by_name();
@@ -256,7 +294,7 @@ public class ControllerLoged {
     public void show_dir_userOnly(){
         if(ukolyUzivatele.isSelected()){
             for(int i = 0;i<arrayTask.size();i++){
-                if(arrayTask.get(i).getDir_users().equals(Controller.getUserName())) {
+                if(!arrayTask.get(i).getDir_users().equals(Controller.getUserName())) {
                     arrayTask.remove(i);
                     i--;
                 }
@@ -285,6 +323,8 @@ public class ControllerLoged {
         }
     };
 
-
+    public void onF5(){
+        refresh();
+    }
 }
 

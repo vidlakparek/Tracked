@@ -44,7 +44,10 @@ public class Controller {
             wrong_cred.setVisible(true);
             throwables.printStackTrace();
         }
-        if(pripojeni != null)change(actionEvent);
+        if(pripojeni != null){
+            userName = mail.getText();
+            change(actionEvent);
+        }
 
     }
 
@@ -62,7 +65,6 @@ public class Controller {
         }
         Stage okno = (Stage)((Node)event.getSource()).getScene().getWindow();
         okno.setScene(loged);
-        userName = mail.getText();
         okno.setTitle("Tracked - " + mail.getText());
         okno.show();
     }
