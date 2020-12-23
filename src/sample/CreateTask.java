@@ -32,7 +32,7 @@ public class CreateTask {
         FXMLLoader fxmlLoader = new FXMLLoader(CreateTask.class.getResource("taskCreate.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
-        Scene scena = new Scene(root1,400,500);
+        Scene scena = new Scene(root1,400,550);
         scena.setFill(Color.TRANSPARENT);
         stage.setScene(scena);
         stage.initStyle(StageStyle.TRANSPARENT);
