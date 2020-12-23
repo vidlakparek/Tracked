@@ -22,13 +22,12 @@ import javax.swing.text.DateFormatter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.sql.*;
+import java.text.Collator;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.*;
 import java.util.Date;
 
 
@@ -279,7 +278,7 @@ public class ControllerLoged {
     public void sort_by_name() {
         sortByPriority.setSelected(false);
         sortByDeadline.setSelected(false);
-        Collections.sort(arrayTask, Comparator.comparing(Task::getName));
+        arrayTask.sort(new nameComparator());
         initializeButtons();
     }
 
@@ -321,6 +320,13 @@ public class ControllerLoged {
             return o1.getName().compareTo(o2.getName());
         }
     };
+
+    private static class nameComparator implements Comparator<Task>{
+        Collator czechCollator = Collator.getInstance(new Locale("cz","CZ"));
+        public int compare(Task t1, Task t2){
+            return czechCollator.compare(t1.getName(),t2.getName());
+        }
+    }
 
     Comparator<Task> comparatorDeadline = (o1, o2) -> {
         if (!o1.getDeadline().equals(o2.getDeadline())) {
