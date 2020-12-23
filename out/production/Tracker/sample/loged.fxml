@@ -23,6 +23,7 @@
           <Menu mnemonicParsing="false" text="Akce">
             <items>
                   <CheckMenuItem fx:id="clearDone" mnemonicParsing="false" onAction="#clear_done" text="Skrýt hotové" />
+                  <CheckMenuItem fx:id="ukolyUzivatele" mnemonicParsing="false" onAction="#show_dir_userOnly" text="Zobrazit pouze úkoly uživatele" />
                   <MenuItem mnemonicParsing="false" onAction="#add_task" text="Přidat úkol" />
                   <MenuItem mnemonicParsing="false" onAction="#refresh" text="Aktualizovat stránku" />
             </items>
