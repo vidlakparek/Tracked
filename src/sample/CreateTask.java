@@ -1,7 +1,5 @@
 package sample;
 
-
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,10 +9,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class CreateTask {
     public ComboBox priorita;
@@ -24,6 +20,8 @@ public class CreateTask {
     public DatePicker deadline;
     public TextArea popis;
     public Label wrong;
+    public ComboBox dirUser;
+
 
     public static void create() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(CreateTask.class.getResource("taskCreate.fxml"));
@@ -37,36 +35,53 @@ public class CreateTask {
 
     }
     public void initialize() {
-        priorita.getItems().removeAll(priorita.getItems());
+        priorita.getItems().removeAll();
         priorita.getItems().addAll("1- Velmi nízká", "2 - Nízká ", "3 - Normální","4 - Vysoká","5 - Urgentní");
 
-        group.getItems().removeAll(group.getItems());
+        group.getItems().removeAll();
         group.getItems().addAll("Úklid", "Vývoj", "Administrativa");
+
+        dirUser.getItems().removeAll();
+        dirUser.getItems().addAll(getAllUsers());
 
     }
 
-    public void addNewTask() {
-        int prioritaNum = 0;
-        switch (String.valueOf(priorita.getValue())) {
-            case "1- Velmi nízká":
-                prioritaNum = 1;
-                break;
-            case "2 - Nízká ":
-                prioritaNum = 2;
-                break;
-            case "3 - Normální":
-                prioritaNum = 3;
-                break;
-            case "4 - Vysoká":
-                prioritaNum = 4;
-                break;
-            case "5 - Urgentní":
-                prioritaNum = 5;
-                break;
-            default:
-                prioritaNum = 0;
+    public ArrayList<String> getAllUsers(){
+        ArrayList<String>users = new ArrayList<>();
+        try {
+            Class.forName( "com.mysql.jdbc.Driver" );
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
-        if (name.getText() !="" && popis.getText() != "" && deadline !=null && prioritaNum != 0 && group.getValue() != "") {
+        Connection conn = Controller.getConnection();
+        try {
+            PreparedStatement dotaz = conn.prepareStatement("SELECT Login FROM Users");
+            ResultSet vysledky = dotaz.executeQuery();
+
+            int i = 0;
+            while (vysledky.next()) {
+                users.add(vysledky.getString(2));
+                }
+            dotaz.close();
+            }
+         catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return users;
+    }
+
+    public void addNewTask() {
+        int prioritaNum = switch (String.valueOf(priorita.getValue())) {
+            case "1- Velmi nízká" -> 1;
+            case "2 - Nízká " -> 2;
+            case "3 - Normální" -> 3;
+            case "4 - Vysoká" -> 4;
+            case "5 - Urgentní" -> 5;
+            default -> 0;
+        };
+        if (name.getText().equals("") || popis.getText().equals("") || deadline == null || prioritaNum == 0 || (group.getValue() == "" && dirUser.getValue() == "")) {
+            wrong.setText("Vyplňte prosím všechny povinné údaje!");
+        } else {
             wrong.setVisible(false);
             try {
                 Class.forName("com.mysql.jdbc.Driver");
@@ -80,9 +95,11 @@ public class CreateTask {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-            String sql = "INSERT INTO Tasks (ID, Název,Popisek,Deadline,Priorita,dir_users,Groups,stav) VALUES ('" + 0 + "','" + name.getText() + "','" + popis.getText() + "','" + deadline.getValue() + "','" + prioritaNum + "','" + "" + "','" + group.getValue() + "','" + 0 + "' )";
+            String sql = "INSERT INTO Tasks (ID, Název,Popisek,Deadline,Priorita,dir_users,Groups,stav) VALUES ('" + 0 + "','" + name.getText() + "','" + popis.getText() + "','" + deadline.getValue() + "','" + prioritaNum + "','" + dirUser.getValue() + "','" + group.getValue() + "','" + 0 + "' )";
             try {
-                dotaz.executeUpdate(sql);
+                if (dotaz != null) {
+                    dotaz.executeUpdate(sql);
+                }
 
                 dotaz.close();
                 close();
@@ -90,7 +107,7 @@ public class CreateTask {
                 throwables.printStackTrace();
             }
         }
-        else wrong.setText("Vyplňte prosím všechny povinné údaje!"); wrong.setVisible(true);
+        wrong.setVisible(true);
     }
 
     public void close() {

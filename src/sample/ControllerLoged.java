@@ -4,7 +4,6 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -16,8 +15,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import java.awt.*;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -28,6 +25,7 @@ import java.util.Comparator;
 
 
 public class ControllerLoged {
+
     int ID = 0;
     String name = null;
     String desc = null;
@@ -37,6 +35,7 @@ public class ControllerLoged {
     String groups = null;
     boolean stav = false;
     protected static ArrayList<Task> arrayTask;
+    String userGroup;
 
     public AnchorPane arPane;
     public ScrollPane scroll;
@@ -45,6 +44,7 @@ public class ControllerLoged {
     public CheckMenuItem sortByName;
     public CheckMenuItem sortByPriority;
     public CheckMenuItem sortByDeadline;
+    public CheckMenuItem ukolyUzivatele;
     public Button butt[];
     public FlowPane fPane;
 
@@ -66,8 +66,29 @@ public class ControllerLoged {
         clock.play();
     }
 
+    /*Zjištění do jakých skupin uživatel patří*/
+    public void groupInitialize(){
+        try {
+            Class.forName( "com.mysql.jdbc.Driver" );
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        Connection conn = Controller.getConnection();
+        try {
+            PreparedStatement dotaz = conn.prepareStatement("SELECT Group FROM User");
+            ResultSet vysledky = dotaz.executeQuery();
+
+            while (vysledky.next()) {
+
+            }
+            dotaz.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
     public void addTasks(){
-        arrayTask = new ArrayList<Task>();
+        arrayTask = new ArrayList<>();
         try {
             Class.forName( "com.mysql.jdbc.Driver" );
         } catch (ClassNotFoundException e) {
@@ -88,9 +109,10 @@ public class ControllerLoged {
                 dir_users = vysledky.getString(6);
                 groups = vysledky.getString(7);
                 stav = vysledky.getBoolean(8);
-                arrayTask.add(i,new Task(ID,name,desc,deadline,priority,dir_users,groups,stav));
-                i++;
-
+                if(groups.equals(userGroup)) {
+                    arrayTask.add(i, new Task(ID, name, desc, deadline, priority, dir_users, groups, stav));
+                    i++;
+                }
             }
             dotaz.close();
         } catch (SQLException throwables) {
@@ -102,8 +124,8 @@ public class ControllerLoged {
     public void initializeButtons(){
         butt = new Button[arrayTask.size()];
         for(int i = 0;i< arrayTask.size();i++) {
-            System.out.println(arrayTask.get(i).getName()+arrayTask.get(i).getDeadlline());
-            butt[i] = new Button(arrayTask.get(i).getName()+ "\n"+"\n"+"\n"+arrayTask.get(i).getDeadlline());
+            System.out.println(arrayTask.get(i).getName()+arrayTask.get(i).getDeadline());
+            butt[i] = new Button(arrayTask.get(i).getName()+ "\n"+"\n"+"\n"+arrayTask.get(i).getDeadline());
             butt[i].setLayoutX(10);
             butt[i].setLayoutY(40 + i*100);
             butt[i].setId("button");
@@ -140,14 +162,17 @@ public class ControllerLoged {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Scene loged = new Scene(LogPar,700,500);
-            Stage okno = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene loged = null;
+        if (LogPar != null) {
+            loged = new Scene(LogPar,700,500);
+        }
+        Stage okno = (Stage)((Node)event.getSource()).getScene().getWindow();
             okno.setScene(loged);
             okno.setTitle("Tracked - přihlašování");
             okno.show();
         }
 
-    public void add_task(ActionEvent event) throws IOException {
+    public void add_task() throws IOException {
         CreateTask.create();
     }
 
@@ -228,26 +253,35 @@ public class ControllerLoged {
         initializeButtons();
     }
 
-
-    Comparator<Task> comparatorPriority = new Comparator<Task>(){
-        @Override
-        public int compare(final Task o1, final Task o2){
-            if(o1.getPriority()!=o2.getPriority()){
-                return Integer.compare(o1.getPriority(),o2.getPriority());
-            }else{
-                return o1.getName().compareTo(o2.getName());
+    public void show_dir_userOnly(){
+        if(ukolyUzivatele.isSelected()){
+            for(int i = 0;i<arrayTask.size();i++){
+                if(arrayTask.get(i).getDir_users().equals(Controller.getUserName())) {
+                    arrayTask.remove(i);
+                    i--;
+                }
             }
+        }
+        else {
+            addTasks();
+        }
+        initializeButtons();
+    }
+
+
+    Comparator<Task> comparatorPriority = (o1, o2) -> {
+        if(o1.getPriority()!=o2.getPriority()){
+            return Integer.compare(o1.getPriority(),o2.getPriority());
+        }else{
+            return o1.getName().compareTo(o2.getName());
         }
     };
 
-    Comparator<Task> comparatorDeadline = new Comparator<Task>(){
-        @Override
-        public int compare(final Task o1, final Task o2){
-            if(!o1.getDeadlline().equals(o2.getDeadlline())){
-                return o1.getDeadlline().compareTo(o2.getDeadlline());
-            }else{
-                return o1.getName().compareTo(o2.getName());
-            }
+    Comparator<Task> comparatorDeadline = (o1, o2) -> {
+        if (!o1.getDeadline().equals(o2.getDeadline())) {
+            return o1.getDeadline().compareTo(o2.getDeadline());
+        } else {
+            return o1.getName().compareTo(o2.getName());
         }
     };
 

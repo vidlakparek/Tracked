@@ -1,7 +1,5 @@
 package sample;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,7 +11,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.net.IDN;
 
 
 public class ShowTask {
@@ -42,7 +39,7 @@ public class ShowTask {
     public void initialize(){
         idAndName.setText("#"+ControllerLoged.arrayTask.get(ID).getID()+" "+ControllerLoged.arrayTask.get(ID).getName());
         popis.setText(ControllerLoged.arrayTask.get(ID).getDesc());
-        deadline.setText(ControllerLoged.arrayTask.get(ID).getDeadlline()+"");
+        deadline.setText(ControllerLoged.arrayTask.get(ID).getDeadline()+"");
         priorita.setText(prioritaText(ControllerLoged.arrayTask.get(ID).getPriority()));
         group.setText(ControllerLoged.arrayTask.get(ID).getGroups());
         stav.setText(done(ControllerLoged.arrayTask.get(ID).getStav()));
@@ -50,21 +47,14 @@ public class ShowTask {
 
 
     public String prioritaText(int i){
-        switch (i) {
-            case 1:
-                return"1 - Velmi nízká";
-            case 2:
-                return"2 - Nízká";
-            case 3:
-                return"3 - Normální";
-            case 4:
-                return"4 - Vysoká";
-            case 5:
-                return"5 - Urgentní";
-
-            default:
-                return"Chyba zadání priority";
-        }
+        return switch (i) {
+            case 1 -> "1 - Velmi nízká";
+            case 2 -> "2 - Nízká";
+            case 3 -> "3 - Normální";
+            case 4 -> "4 - Vysoká";
+            case 5 -> "5 - Urgentní";
+            default -> "Chyba zadání priority";
+        };
     }
     public String done(boolean a){
         if (a)return"Dokončeno";

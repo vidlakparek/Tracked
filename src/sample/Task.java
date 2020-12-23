@@ -3,14 +3,14 @@ package sample;
 import java.util.Date;
 
 public class Task {
-    private int ID;
-    private String name;
-    private String desc;
-    private Date deadline;
-    private int priority;
-    private String dir_users;
-    private String groups;
-    private boolean stav;
+    private final int ID;
+    private final String name;
+    private final String desc;
+    private final Date deadline;
+    private final int priority;
+    private final String dir_users;
+    private final String groups;
+    private final boolean stav;
 
 
 
@@ -34,9 +34,7 @@ public class Task {
     public String getDesc(){
         return desc;
     }
-    public Date getDeadlline(){
-        return deadline;
-    }
+    public Date getDeadline(){ return deadline; }
     public int getPriority(){
         return priority;
     }

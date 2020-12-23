@@ -23,5 +23,6 @@
       <Button id="save" layoutX="251.0" layoutY="521.0" mnemonicParsing="false" onAction="#addNewTask" prefHeight="42.0" prefWidth="86.0" stylesheets="@../CSS/createTask.css" text="Uložit" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="62.60000000000002" AnchorPane.topAnchor="420.0" />
       <Button id="closeButt" fx:id="closeButton" layoutX="337.0" layoutY="19.0" mnemonicParsing="false" onAction="#close" stylesheets="@../CSS/createTask.css" text="×" />
       <Label fx:id="wrong" layoutX="42.0" layoutY="436.0" visible="false" />
+      <ComboBox fx:id="dirUser" layoutX="30.0" layoutY="422.0" prefWidth="150.0" styleClass="choiceBox" stylesheets="@../CSS/createTask.css" />
    </children>
 </AnchorPane>

@@ -27,6 +27,7 @@ public class Controller {
     public Label wrong_cred;
     public static Connection pripojeni = null;
     public AnchorPane mainPane;
+    static String userName;
 
 
 
@@ -55,9 +56,13 @@ public class Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Scene loged = new Scene(LogPar,700,500);
+        Scene loged = null;
+        if (LogPar != null) {
+            loged = new Scene(LogPar,700,500);
+        }
         Stage okno = (Stage)((Node)event.getSource()).getScene().getWindow();
         okno.setScene(loged);
+        userName = mail.getText();
         okno.setTitle("Tracked - " + mail.getText());
         okno.show();
     }
@@ -65,6 +70,7 @@ public class Controller {
     public static Connection getConnection(){
         return pripojeni;
     }
+    public static String getUserName(){return userName;}
 
     public void onEnter(ActionEvent ae){
         login(ae);
