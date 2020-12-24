@@ -6,6 +6,7 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -32,6 +34,7 @@ import java.util.Date;
 
 
 public class ControllerLoged {
+    public Button closeButton;
     int ID = 0;
     String name = null;
     String desc = null;
@@ -150,10 +153,11 @@ public class ControllerLoged {
         butt = new Button[arrayTask.size()];
         for(int i = 0;i< arrayTask.size();i++) {
             System.out.println(arrayTask.get(i).getName()+arrayTask.get(i).getDeadline());
-            butt[i] = new Button(arrayTask.get(i).getName()+ "\n"+"\n"+"\n"+arrayTask.get(i).getDeadline());
+            butt[i] = new Button(arrayTask.get(i).getName()+ "\n"+"\n"+arrayTask.get(i).getDeadline());
             butt[i].setLayoutX(10);
             butt[i].setLayoutY(40 + i*100);
             butt[i].setId("button");
+            butt[i].setTextAlignment(TextAlignment.CENTER);
             butt[i].setPrefSize(600,100);
             int finalI = i;
             butt[i].setOnAction(event -> {
@@ -167,6 +171,7 @@ public class ControllerLoged {
             });
         }
         fPane = new FlowPane();
+        fPane.setPadding(new Insets(10, 20, 0, 40));
         fPane.getChildren().addAll(butt);
         scroll.setContent(fPane);
 
@@ -320,6 +325,12 @@ public class ControllerLoged {
             return o1.getName().compareTo(o2.getName());
         }
     };
+
+    public void close(ActionEvent actionEvent) {
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
+        
+    }
 
     private static class nameComparator implements Comparator<Task>{
         Collator czechCollator = Collator.getInstance(new Locale("cz","CZ"));

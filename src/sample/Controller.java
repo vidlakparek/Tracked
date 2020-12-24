@@ -28,7 +28,7 @@ public class Controller {
     public static Connection pripojeni = null;
     public AnchorPane mainPane;
     static String userName;
-
+    public Button closeButton;
 
 
     public void login(ActionEvent actionEvent) {
@@ -76,5 +76,10 @@ public class Controller {
 
     public void onEnter(ActionEvent ae){
         login(ae);
+    }
+
+    public void close(ActionEvent actionEvent) {
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
     }
 }

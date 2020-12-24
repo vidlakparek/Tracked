@@ -13,5 +13,6 @@
       <Label id="logo" layoutX="219.0" layoutY="48.0" prefHeight="100.0" prefWidth="262.0" text="Tracked" AnchorPane.bottomAnchor="325.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="75.0" />
       <Button id="logbutton" fx:id="log_butt" layoutX="227.0" layoutY="358.0" mnemonicParsing="false" onAction="#login" prefHeight="40.0" prefWidth="250.0" stylesheets="@../CSS/style.css" text="Log in" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="360.0" />
       <Label id="wrong_cred" fx:id="wrong_cred" layoutX="208.0" layoutY="216.0" prefHeight="17.0" prefWidth="287.0" text="Byly zdadány špatné přihlašovací údaje." textAlignment="CENTER" visible="false" />
+      <Button id="closeButt" fx:id="closeButton" layoutX="663.0" layoutY="-1.0" mnemonicParsing="false" onAction="#close" prefHeight="30.0" prefWidth="40.0" stylesheets="@../CSS/style.css" text="×" AnchorPane.rightAnchor="0.0" />
    </children>
 </AnchorPane>
