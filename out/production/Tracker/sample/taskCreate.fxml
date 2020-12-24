@@ -13,7 +13,7 @@
       <Label layoutX="33.0" layoutY="37.0" stylesheets="@../CSS/createTask.css" text="Název" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="35.0" />
       <TextField fx:id="name" layoutX="33.0" layoutY="67.0" prefHeight="42.0" prefWidth="331.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="65.0" />
       <Label layoutX="33.0" layoutY="119.0" stylesheets="@../CSS/createTask.css" text="Popisek" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="115.0" />
-      <TextArea fx:id="popis" layoutX="83.0" layoutY="143.0" prefHeight="90.0" prefWidth="282.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="145.0" />
+      <TextArea fx:id="popis" layoutX="83.0" layoutY="143.0" prefHeight="90.0" prefWidth="280.0" wrapText="true" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="145.0" />
       <Label layoutX="33.0" layoutY="246.0" stylesheets="@../CSS/createTask.css" text="Deadline" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="240.0" />
       <DatePicker fx:id="deadline" layoutX="33.0" layoutY="273.0" prefHeight="26.0" prefWidth="331.0" stylesheets="@../CSS/createTask.css" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="270.0" />
       <Label layoutX="35.0" layoutY="326.0" stylesheets="@../CSS/createTask.css" text="Priorita" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="320.0" />

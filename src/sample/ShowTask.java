@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -23,17 +24,18 @@ public class ShowTask {
     public Label priorita;
     public Label group;
     public Label stav;
-    public CheckBox splneno;
     public Button closeButton;
     public static int ID = 0;
     protected static Scene scena;
+    public TextArea solution;
+    public Button Submit;
 
 
     public static void create() throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(CreateTask.class.getResource("showTask.fxml"));
         Parent root1 = fxmlLoader.load();
         Stage stage = new Stage();
-        scena = new Scene(root1,400,500);
+        scena = new Scene(root1,375,450);
         scena.setFill(Color.TRANSPARENT);
         stage.setScene(scena);
         stage.initStyle(StageStyle.TRANSPARENT);
@@ -45,22 +47,14 @@ public class ShowTask {
         popis.setText(ControllerLoged.arrayTask.get(ID).getDesc());
         deadline.setText(ControllerLoged.arrayTask.get(ID).getDeadline()+"");
         priorita.setText(prioritaText(ControllerLoged.arrayTask.get(ID).getPriority()));
-        group.setText(ControllerLoged.arrayTask.get(ID).getGroups());
+        if (ControllerLoged.arrayTask.get(ID).getDir_users()!=null)group.setText(ControllerLoged.arrayTask.get(ID).getDir_users());
+        else group.setText(ControllerLoged.arrayTask.get(ID).getGroups());
         stav.setText(done(ControllerLoged.arrayTask.get(ID).getStav()));
-        if(ControllerLoged.arrayTask.get(ID).getStav())splneno.setSelected(true);
-        else splneno.setSelected(false);
     }
 
-    public void updateStav(){
-        String sqlUpdate = "";
-        if(splneno.isSelected()){
-            sqlUpdate = "UPDATE Tasks SET Stav = 1 WHERE ID ="+ControllerLoged.arrayTask.get(ID).getID();
+    public void submit(){
+        String sqlUpdate = "UPDATE Tasks SET Stav = 1, Solution = '"+solution.getText()+"' WHERE ID ="+ControllerLoged.arrayTask.get(ID).getID();
             stav.setText("Dokončeno");
-        }
-        else {
-            sqlUpdate = "UPDATE Tasks SET Stav = 0 WHERE ID ="+ControllerLoged.arrayTask.get(ID).getID();
-            stav.setText("Nedokončeno");
-        }
         try {
             Class.forName( "com.mysql.jdbc.Driver" );
         } catch (ClassNotFoundException e) {
@@ -90,7 +84,14 @@ public class ShowTask {
         };
     }
     public String done(boolean a){
-        if (a)return"Dokončeno";
+        if (a){
+            return"Dokončeno";
+            //Nastevení textu
+            //solution.setEditable(false);
+            //Submit.setVisible(false);
+            //solution.setPrefSize(310,80);
+
+        }
         else return"Nedokončeno";
     }
     public void close() {

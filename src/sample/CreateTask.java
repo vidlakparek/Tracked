@@ -125,7 +125,9 @@ public class CreateTask {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-            String sql = "INSERT INTO Tasks (ID, Název,Popisek,Deadline,Priorita,dir_users,Groups,stav) VALUES ('" + 0 + "','" + name.getText() + "','" + popis.getText() + "','" + deadline.getValue() + "','" + prioritaNum + "','" + dirUser.getValue() + "','" + group.getValue() + "','" + 0 + "' )";
+            String sql;
+            if (dirUser.getValue()==null)sql = "INSERT INTO Tasks (ID, Název,Popisek,Deadline,Priorita,dir_users,Groups,stav) VALUES ('" + 0 + "','" + name.getText() + "','" + popis.getText() + "','" + deadline.getValue() + "','" + prioritaNum + "','" + null + "','" + group.getValue() + "','" + 0 + "' )";
+            else sql = "INSERT INTO Tasks (ID, Název,Popisek,Deadline,Priorita,dir_users,Groups,stav) VALUES ('" + 0 + "','" + name.getText() + "','" + popis.getText() + "','" + deadline.getValue() + "','" + prioritaNum + "','" + dirUser.getValue() + "','" + group.getValue() + "','" + 0 + "' )";
             try {
                 if (dotaz != null) {
                     dotaz.executeUpdate(sql);
