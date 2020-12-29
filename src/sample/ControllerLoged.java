@@ -134,9 +134,9 @@ public class ControllerLoged {
                 desc = vysledky.getString(3);
                 deadline = vysledky.getDate(4);
                 priority = vysledky.getInt(5);
-                if(vysledky.getString(6)==null) dir_users = "";
+                if(vysledky.getString(6)==null)dir_users = "none";
                 else dir_users = vysledky.getString(6);
-                if(vysledky.getString(7)==null)groups = "";
+                if(vysledky.getString(7)==null)groups = "none";
                 else groups = vysledky.getString(7);
                 stav = vysledky.getBoolean(8);
                 solution = vysledky.getString(9);

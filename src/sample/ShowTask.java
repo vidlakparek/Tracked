@@ -9,7 +9,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.io.IOException;
 import java.sql.*;
 
@@ -45,7 +44,8 @@ public class ShowTask {
         popis.setText(ControllerLoged.arrayTask.get(ID).getDesc());
         deadline.setText(ControllerLoged.arrayTask.get(ID).getDeadline()+"");
         priorita.setText(prioritaText(ControllerLoged.arrayTask.get(ID).getPriority()));
-        if (ControllerLoged.arrayTask.get(ID).getDir_users()!=null)group.setText(ControllerLoged.arrayTask.get(ID).getDir_users());
+        System.out.println(ControllerLoged.arrayTask.get(ID).getDir_users());
+        if (ControllerLoged.arrayTask.get(ID).getDir_users()!="none")group.setText(ControllerLoged.arrayTask.get(ID).getDir_users());
         else group.setText(ControllerLoged.arrayTask.get(ID).getGroups());
         stav.setText(done(ControllerLoged.arrayTask.get(ID).getStav()));
         solution.setText(ControllerLoged.arrayTask.get(ID).getSolution());
