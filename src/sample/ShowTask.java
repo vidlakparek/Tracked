@@ -1,11 +1,9 @@
 package sample;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.paint.Color;
@@ -50,11 +48,13 @@ public class ShowTask {
         if (ControllerLoged.arrayTask.get(ID).getDir_users()!=null)group.setText(ControllerLoged.arrayTask.get(ID).getDir_users());
         else group.setText(ControllerLoged.arrayTask.get(ID).getGroups());
         stav.setText(done(ControllerLoged.arrayTask.get(ID).getStav()));
+        solution.setText(ControllerLoged.arrayTask.get(ID).getSolution());
     }
 
     public void submit(){
         String sqlUpdate = "UPDATE Tasks SET Stav = 1, Solution = '"+solution.getText()+"' WHERE ID ="+ControllerLoged.arrayTask.get(ID).getID();
             stav.setText("Dokončeno");
+
         try {
             Class.forName( "com.mysql.jdbc.Driver" );
         } catch (ClassNotFoundException e) {
@@ -68,6 +68,7 @@ public class ShowTask {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        stav.setText(done(ControllerLoged.arrayTask.get(ID).getStav()));
 
     }
 
@@ -85,12 +86,10 @@ public class ShowTask {
     }
     public String done(boolean a){
         if (a){
+            solution.setEditable(false);
+            Submit.setVisible(false);
+            solution.setPrefSize(310,80);
             return"Dokončeno";
-            //Nastevení textu
-            //solution.setEditable(false);
-            //Submit.setVisible(false);
-            //solution.setPrefSize(310,80);
-
         }
         else return"Nedokončeno";
     }

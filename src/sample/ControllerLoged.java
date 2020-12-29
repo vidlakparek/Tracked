@@ -43,6 +43,7 @@ public class ControllerLoged {
     String dir_users = null;
     String groups = null;
     boolean stav = false;
+    String solution = null;
     protected static ArrayList<Task> arrayTask;
     String vyvoj="";
     String uklid="";
@@ -133,12 +134,15 @@ public class ControllerLoged {
                 desc = vysledky.getString(3);
                 deadline = vysledky.getDate(4);
                 priority = vysledky.getInt(5);
-                dir_users = vysledky.getString(6);
-                groups = vysledky.getString(7);
+                if(vysledky.getString(6)==null) dir_users = "";
+                else dir_users = vysledky.getString(6);
+                if(vysledky.getString(7)==null)groups = "";
+                else groups = vysledky.getString(7);
                 stav = vysledky.getBoolean(8);
+                solution = vysledky.getString(9);
 
-                if(groups.equals(vyvoj)||groups.equals(uklid)||groups.equals(administrativa)) {
-                    arrayTask.add(i, new Task(ID, name, desc, deadline, priority, dir_users, groups, stav));
+                if(groups.equals(vyvoj)||groups.equals(uklid)||groups.equals(administrativa)||dir_users.equals(Controller.userName)) {
+                    arrayTask.add(i, new Task(ID, name, desc, deadline, priority, dir_users, groups, stav, solution));
                     i++;
                 }
             }
@@ -156,7 +160,8 @@ public class ControllerLoged {
             butt[i] = new Button(arrayTask.get(i).getName()+ "\n"+"\n"+arrayTask.get(i).getDeadline());
             butt[i].setLayoutX(10);
             butt[i].setLayoutY(40 + i*100);
-            butt[i].setId("button");
+            if(arrayTask.get(i).getStav())butt[i].setId("buttonDone");
+            else butt[i].setId("button");
             butt[i].setTextAlignment(TextAlignment.CENTER);
             butt[i].setPrefSize(600,100);
             int finalI = i;
@@ -200,6 +205,7 @@ public class ControllerLoged {
             okno.setScene(loged);
             okno.setTitle("Tracked - přihlašování");
             okno.show();
+            Controller.pripojeni = null;
         }
 
     public void add_task() throws IOException {
@@ -262,7 +268,6 @@ public class ControllerLoged {
                 initializeButtons();
             }
         }
-        /*Aktualizace seznamu tasks, stejně jako při stisknutí klávesy F5*/
     }
 
     public void clear_done() {
@@ -281,25 +286,34 @@ public class ControllerLoged {
     }
 
     public void sort_by_name() {
-        sortByPriority.setSelected(false);
-        sortByDeadline.setSelected(false);
-        arrayTask.sort(new nameComparator());
-        initializeButtons();
+        if(sortByName.isSelected()){
+            sortByPriority.setSelected(false);
+            sortByDeadline.setSelected(false);
+            arrayTask.sort(new nameComparator());
+            initializeButtons();
+        }
+        else refresh();
     }
 
     public void sort_by_priority() {
-        sortByName.setSelected(false);
-        sortByDeadline.setSelected(false);
-        Collections.sort(arrayTask, comparatorPriority);
-        Collections.reverse(arrayTask);
-        initializeButtons();
+        if(sortByPriority.isSelected()) {
+            sortByName.setSelected(false);
+            sortByDeadline.setSelected(false);
+            Collections.sort(arrayTask, comparatorPriority);
+            Collections.reverse(arrayTask);
+            initializeButtons();
+        }
+        else refresh();
     }
 
     public void sort_by_deadline() {
-        sortByName.setSelected(false);
-        sortByPriority.setSelected(false);
-        Collections.sort(arrayTask, comparatorDeadline);
-        initializeButtons();
+        if(sortByDeadline.isSelected()) {
+            sortByName.setSelected(false);
+            sortByPriority.setSelected(false);
+            Collections.sort(arrayTask, comparatorDeadline);
+            initializeButtons();
+        }
+        else refresh();
     }
 
     public void show_dir_userOnly(){
@@ -346,9 +360,5 @@ public class ControllerLoged {
             return o1.getName().compareTo(o2.getName());
         }
     };
-
-    public void onF5(){
-        refresh();
-    }
 }
 
