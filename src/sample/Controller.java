@@ -78,7 +78,7 @@ public class Controller {
         login(ae);
     }
 
-    public void close(ActionEvent actionEvent) {
+    public void close() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }

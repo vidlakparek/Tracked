@@ -4,7 +4,6 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -20,13 +19,9 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import javax.swing.text.DateFormatter;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.sql.*;
 import java.text.Collator;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -61,7 +56,7 @@ public class ControllerLoged {
     public CheckMenuItem sortByDeadline;
     public CheckMenuItem ukolyUzivatele;
     public MenuItem addUkol;
-    public Button butt[];
+    public Button[] butt;
     public FlowPane fPane;
 
 
@@ -101,12 +96,12 @@ public class ControllerLoged {
 
             while (vysledky.next()) {
                 if(vysledky.getString(2).equals(Controller.getUserName())){
-                    if(vysledky.getString(3).substring(0,1).equals("1"))vyvoj="Vývoj";
-                    if(vysledky.getString(4).substring(0,1).equals("1"))uklid="Úklid";
-                    if(vysledky.getString(5).substring(0,1).equals("1"))administrativa="Administrativa";
-                    if(vysledky.getString(3).substring(1).equals("1"))bvyvoj=true;
-                    if(vysledky.getString(4).substring(1).equals("1"))buklid=true;
-                    if(vysledky.getString(5).substring(1).equals("1"))badministrativa=true;
+                    if(vysledky.getString(3).charAt(0) == '1')vyvoj="Vývoj";
+                    if(vysledky.getString(4).charAt(0) == '1')uklid="Úklid";
+                    if(vysledky.getString(5).charAt(0) == '1')administrativa="Administrativa";
+                    if(vysledky.getString(3).charAt(1) == '1')bvyvoj=true;
+                    if(vysledky.getString(4).charAt(1) == '1')buklid=true;
+                    if(vysledky.getString(5).charAt(1) == '1')badministrativa=true;
                 }
             }
             dotaz.close();
@@ -299,7 +294,7 @@ public class ControllerLoged {
         if(sortByPriority.isSelected()) {
             sortByName.setSelected(false);
             sortByDeadline.setSelected(false);
-            Collections.sort(arrayTask, comparatorPriority);
+            arrayTask.sort(comparatorPriority);
             Collections.reverse(arrayTask);
             initializeButtons();
         }
@@ -310,7 +305,7 @@ public class ControllerLoged {
         if(sortByDeadline.isSelected()) {
             sortByName.setSelected(false);
             sortByPriority.setSelected(false);
-            Collections.sort(arrayTask, comparatorDeadline);
+            arrayTask.sort(comparatorDeadline);
             initializeButtons();
         }
         else refresh();
@@ -332,32 +327,34 @@ public class ControllerLoged {
     }
 
 
-    Comparator<Task> comparatorPriority = (o1, o2) -> {
-        if(o1.getPriority()!=o2.getPriority()){
-            return Integer.compare(o1.getPriority(),o2.getPriority());
+    Comparator<Task> comparatorPriority = (t1, t2) -> {
+        Collator czechCollator = Collator.getInstance(new Locale("cs","CZ"));
+        if(t1.getPriority()!=t2.getPriority()){
+            return Integer.compare(t1.getPriority(),t2.getPriority());
         }else{
-            return o1.getName().compareTo(o2.getName());
+            return czechCollator.compare(t1.getName(),t2.getName());
         }
     };
 
-    public void close(ActionEvent actionEvent) {
+    public void close() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
         
     }
 
     private static class nameComparator implements Comparator<Task>{
-        Collator czechCollator = Collator.getInstance(new Locale("cz","CZ"));
+        Collator czechCollator = Collator.getInstance(new Locale("cs","CZ"));
         public int compare(Task t1, Task t2){
             return czechCollator.compare(t1.getName(),t2.getName());
         }
     }
 
-    Comparator<Task> comparatorDeadline = (o1, o2) -> {
-        if (!o1.getDeadline().equals(o2.getDeadline())) {
-            return o1.getDeadline().compareTo(o2.getDeadline());
+    Comparator<Task> comparatorDeadline = (t1, t2) -> {
+        Collator czechCollator = Collator.getInstance(new Locale("cs","CZ"));
+        if (!t1.getDeadline().equals(t2.getDeadline())) {
+            return t1.getDeadline().compareTo(t2.getDeadline());
         } else {
-            return o1.getName().compareTo(o2.getName());
+            return czechCollator.compare(t1.getName(),t2.getName());
         }
     };
 }
