@@ -82,7 +82,6 @@ public class ControllerLoged {
         clock.play();
     }
 
-    /*Zjištění do jakých skupin uživatel patří*/
     public void groupInitialize(){
         try {
             Class.forName( "com.mysql.jdbc.Driver" );

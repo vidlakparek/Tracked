@@ -11,10 +11,10 @@
 -fx-text-fill: #2196f3;
 }
 #buttonDone{
--fx-background-color: #26cf23;
+-fx-background-color: #ffffff;
 -fx-transition: background-color 0.4s ease;
 -fx-background-radius:  100px;
--fx-border-color:#A9A9A9;
+-fx-border-color:#7FFF00;
 -fx-border-width: 2;
 -fx-border-radius:  100px;
 -fx-border-insets: 5px;
@@ -28,7 +28,9 @@
 -fx-border-style: solid;
 -fx-border-radius:  100px;
 }
-
+#buttonDone:hover{
+-fx-border-width: 3;
+}
 .scroll-bar:vertical{
 -fx-background-color: transparent;
 }

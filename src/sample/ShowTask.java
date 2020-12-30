@@ -68,7 +68,6 @@ public class ShowTask {
             throwables.printStackTrace();
         }
         stav.setText(done(ControllerLoged.arrayTask.get(ID).getStav()));
-
     }
 
 
