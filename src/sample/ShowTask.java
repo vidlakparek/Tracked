@@ -51,7 +51,7 @@ public class ShowTask {
     }
 
     public void submit(){
-        String sqlUpdate = "UPDATE Tasks SET Stav = 1, Solution = '"+solution.getText()+"' WHERE ID ="+ControllerLoged.arrayTask.get(ID).getID();
+        String sqlUpdate = "UPDATE Tasks SET Stav = 1, Solution = '"+solution.getText()+"\nOdevzdal uživatel: "+Controller.userName+"' WHERE ID ="+ControllerLoged.arrayTask.get(ID).getID();
             stav.setText("Dokončeno");
 
         try {
