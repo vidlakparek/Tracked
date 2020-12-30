@@ -16,6 +16,6 @@
       <Label fx:id="wrong" layoutX="42.0" layoutY="436.0" visible="false" />
       <Label fx:id="stav" layoutX="28.0" layoutY="289.0" stylesheets="@../CSS/createTask.css" text="Stav : " AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="300.0" />
       <Button id="save" fx:id="Submit" layoutX="257.0" layoutY="364.0" mnemonicParsing="false" onAction="#submit" prefHeight="52.0" prefWidth="88.0" stylesheets="@../CSS/createTask.css" text="Odevzdat" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="365.0" />
-      <TextArea fx:id="solution" layoutX="30.0" layoutY="350.0" prefHeight="80.0" prefWidth="210.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="350.0" />
+      <TextArea fx:id="solution" layoutX="30.0" layoutY="350.0" prefHeight="80.0" prefWidth="210.0" wrapText="true" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="350.0" />
    </children>
 </AnchorPane>

@@ -9,6 +9,7 @@
  -fx-background-radius:  45px;
  -fx-border-radius:  45px;
  -fx-background-color: rgb(255,255,255);opacity:0.2;
+ -fx-border-color: #D3D3D3;
 
 }
 .label{
