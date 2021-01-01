@@ -187,7 +187,7 @@ public class ControllerLoged {
 
             Parent LogPar = null;
             try {
-                LogPar = FXMLLoader.load(getClass().getResource("sample.fxml"));
+                LogPar = FXMLLoader.load(getClass().getResource("FXML/sample.fxml"));
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -14,13 +14,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("FXML/sample.fxml"));
         Scene scena = new Scene(root, 700, 500);
         scena.setFill(Color.TRANSPARENT);
         primaryStage.setScene(scena);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.show();
-        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("Logo.png")));
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("../resources/Logo.png")));
 
     }
 

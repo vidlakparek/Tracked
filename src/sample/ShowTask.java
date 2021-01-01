@@ -29,7 +29,7 @@ public class ShowTask {
 
 
     public static void create() throws IOException{
-        FXMLLoader fxmlLoader = new FXMLLoader(CreateTask.class.getResource("showTask.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(CreateTask.class.getResource("FXML/showTask.fxml"));
         Parent root1 = fxmlLoader.load();
         Stage stage = new Stage();
         scena = new Scene(root1,375,450);
