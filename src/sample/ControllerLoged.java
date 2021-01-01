@@ -34,7 +34,7 @@ public class ControllerLoged {
     int ID = 0;
     String name = null;
     String desc = null;
-    Date deadline = null;
+    LocalDateTime deadline = null;
     int priority = 0;
     String dir_users = null;
     String groups = null;

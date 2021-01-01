@@ -12,13 +12,14 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import tornadofx.control.DateTimePicker;
 
 public class CreateTask {
     public ComboBox priorita;
     public ComboBox group;
     public Button closeButton;
     public TextField name;
-    public DatePicker deadline;
+    public DateTimePicker deadline;
     public TextArea popis;
     public Label wrong;
     public ComboBox dirUser;
