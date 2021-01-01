@@ -22,6 +22,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.sql.*;
 import java.text.Collator;
+import java.text.DateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -149,9 +150,11 @@ public class ControllerLoged {
 
     public void initializeButtons(){
         butt = new Button[arrayTask.size()];
+        String datum;
         for(int i = 0;i< arrayTask.size();i++) {
+            datum = DateFormat.getDateInstance(DateFormat.MEDIUM).format(arrayTask.get(i).getDeadline());
             System.out.println(arrayTask.get(i).getName()+arrayTask.get(i).getDeadline());
-            butt[i] = new Button(arrayTask.get(i).getName()+ "\n"+"\n"+arrayTask.get(i).getDeadline());
+            butt[i] = new Button(arrayTask.get(i).getName()+ "\n"+"\n"+datum);
             butt[i].setLayoutX(10);
             butt[i].setLayoutY(40 + i*100);
             if(arrayTask.get(i).getStav())butt[i].setId("buttonDone");

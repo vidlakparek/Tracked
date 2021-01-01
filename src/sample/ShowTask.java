@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.sql.*;
+import java.time.LocalDateTime;
 
 
 public class ShowTask {
@@ -42,6 +43,7 @@ public class ShowTask {
     public void initialize(){
         idAndName.setText("#"+ControllerLoged.arrayTask.get(ID).getID()+" "+ControllerLoged.arrayTask.get(ID).getName());
         popis.setText(ControllerLoged.arrayTask.get(ID).getDesc());
+        // TODO: 30.12.2020 Naformátovat zobrazovaný datum(Napřed vyřešit datum s časem) 
         deadline.setText(ControllerLoged.arrayTask.get(ID).getDeadline()+"");
         priorita.setText(prioritaText(ControllerLoged.arrayTask.get(ID).getPriority()));
         if (!ControllerLoged.arrayTask.get(ID).getDir_users().equals("none"))group.setText(ControllerLoged.arrayTask.get(ID).getDir_users());
@@ -51,7 +53,8 @@ public class ShowTask {
     }
 
     public void submit(){
-        String sqlUpdate = "UPDATE Tasks SET Stav = 1, Solution = '"+solution.getText()+"' WHERE ID ="+ControllerLoged.arrayTask.get(ID).getID();
+        // TODO: 30.12.2020 Naformátovat čas odevzdání 
+        String sqlUpdate = "UPDATE Tasks SET Stav = 1, Solution = '"+solution.getText()+"\nOdevzdal uživatel: "+Controller.userName+"\n"+ LocalDateTime.now() +"' WHERE ID ="+ControllerLoged.arrayTask.get(ID).getID();
             stav.setText("Dokončeno");
 
         try {
