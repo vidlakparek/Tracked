@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.text.Collator;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -35,6 +36,7 @@ public class ControllerLoged {
     String name = null;
     String desc = null;
     LocalDateTime deadline = null;
+    Timestamp dead = null;
     int priority = 0;
     String dir_users = null;
     String groups = null;
@@ -60,6 +62,9 @@ public class ControllerLoged {
     public Button[] butt;
     public FlowPane fPane;
 
+    DateTimeFormatter formatterLC = DateTimeFormatter.ofPattern("dd. MMMM HH:mm");
+    DateFormat formatter = new SimpleDateFormat("dd. MMMM yyyy HH:mm");
+
 
 
     public void initialize(){
@@ -76,8 +81,7 @@ public class ControllerLoged {
     public void initClock() {
 
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd. MMMM HH:mm");
-            timeLabel.setText(LocalDateTime.now().format(formatter));
+            timeLabel.setText(LocalDateTime.now().format(formatterLC));
         }), new KeyFrame(Duration.seconds(1)));
         clock.setCycleCount(Animation.INDEFINITE);
         clock.play();
@@ -127,7 +131,7 @@ public class ControllerLoged {
                 ID = vysledky.getInt(1);
                 name = vysledky.getString(2);
                 desc = vysledky.getString(3);
-                deadline = vysledky.getDate(4);
+                dead = vysledky.getTimestamp(4);
                 priority = vysledky.getInt(5);
                 if(vysledky.getString(6)==null)dir_users = "none";
                 else dir_users = vysledky.getString(6);
@@ -135,9 +139,8 @@ public class ControllerLoged {
                 else groups = vysledky.getString(7);
                 stav = vysledky.getBoolean(8);
                 solution = vysledky.getString(9);
-
                 if(groups.equals(vyvoj)||groups.equals(uklid)||groups.equals(administrativa)||dir_users.equals(Controller.userName)) {
-                    arrayTask.add(i, new Task(ID, name, desc, deadline, priority, dir_users, groups, stav, solution));
+                    arrayTask.add(i, new Task(ID, name, desc, dead, priority, dir_users, groups, stav, solution));
                     i++;
                 }
             }
@@ -151,14 +154,16 @@ public class ControllerLoged {
     public void initializeButtons(){
         butt = new Button[arrayTask.size()];
         String datum;
+        Timestamp now;
         for(int i = 0;i< arrayTask.size();i++) {
-            datum = DateFormat.getDateInstance(DateFormat.MEDIUM).format(arrayTask.get(i).getDeadline());
+            datum = formatter.format(arrayTask.get(i).getDeadline());
             System.out.println(arrayTask.get(i).getName()+arrayTask.get(i).getDeadline());
             butt[i] = new Button(arrayTask.get(i).getName()+ "\n"+"\n"+datum);
             butt[i].setLayoutX(10);
             butt[i].setLayoutY(40 + i*100);
+            LocalDateTime lc = arrayTask.get(i).getDeadline().toLocalDateTime();
             if(arrayTask.get(i).getStav())butt[i].setId("buttonDone");
-            else butt[i].setId("button");
+            else /*if(lc < now)*/ butt[i].setId("button");
             butt[i].setTextAlignment(TextAlignment.CENTER);
             butt[i].setPrefSize(600,100);
             int finalI = i;

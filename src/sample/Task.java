@@ -1,13 +1,15 @@
 package sample;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Task {
+    // TODO: 01.01.2021 Vyřešit problém s datumem a časem
     private final int ID;
     private final String name;
     private final String desc;
-    private final LocalDateTime deadline;
+    private final Timestamp deadline;
     private final int priority;
     private final String dir_users;
     private final String groups;
@@ -17,7 +19,7 @@ public class Task {
 
 
 
-    public Task(int ID, String name, String desc, LocalDateTime deadline, int priority, String dir_users, String groups, boolean stav, String solution){
+    public Task(int ID, String name, String desc, Timestamp deadline, int priority, String dir_users, String groups, boolean stav, String solution){
     this.ID = ID;
     this.name = name;
     this.desc = desc;
@@ -38,7 +40,7 @@ public class Task {
     public String getDesc(){
         return desc;
     }
-    public LocalDateTime getDeadline(){ return deadline; }
+    public Timestamp getDeadline(){ return deadline; }
     public int getPriority(){
         return priority;
     }

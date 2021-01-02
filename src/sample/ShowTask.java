@@ -11,7 +11,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 public class ShowTask {
@@ -27,6 +30,8 @@ public class ShowTask {
     protected static Scene scena;
     public TextArea solution;
     public Button Submit;
+    DateFormat formater = new SimpleDateFormat("dd. MMMM yyyy HH:mm");
+    DateTimeFormatter formatterLC = DateTimeFormatter.ofPattern("dd. MMMM HH:mm");
 
 
     public static void create() throws IOException{
@@ -41,10 +46,11 @@ public class ShowTask {
     }
 
     public void initialize(){
+
         idAndName.setText("#"+ControllerLoged.arrayTask.get(ID).getID()+" "+ControllerLoged.arrayTask.get(ID).getName());
         popis.setText(ControllerLoged.arrayTask.get(ID).getDesc());
         // TODO: 30.12.2020 Naformátovat zobrazovaný datum(Napřed vyřešit datum s časem) 
-        deadline.setText(ControllerLoged.arrayTask.get(ID).getDeadline()+"");
+        deadline.setText(formater.format(ControllerLoged.arrayTask.get(ID).getDeadline()));
         priorita.setText(prioritaText(ControllerLoged.arrayTask.get(ID).getPriority()));
         if (!ControllerLoged.arrayTask.get(ID).getDir_users().equals("none"))group.setText(ControllerLoged.arrayTask.get(ID).getDir_users());
         else group.setText(ControllerLoged.arrayTask.get(ID).getGroups());
@@ -54,7 +60,7 @@ public class ShowTask {
 
     public void submit(){
         // TODO: 30.12.2020 Naformátovat čas odevzdání 
-        String sqlUpdate = "UPDATE Tasks SET Stav = 1, Solution = '"+solution.getText()+"\nOdevzdal uživatel: "+Controller.userName+"\n"+ LocalDateTime.now() +"' WHERE ID ="+ControllerLoged.arrayTask.get(ID).getID();
+        String sqlUpdate = "UPDATE Tasks SET Stav = 1, Solution = '"+solution.getText()+"\nOdevzdal uživatel: "+Controller.userName+"\n"+ LocalDateTime.now().format(formatterLC) +"' WHERE ID ="+ControllerLoged.arrayTask.get(ID).getID();
             stav.setText("Dokončeno");
 
         try {
