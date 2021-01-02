@@ -163,7 +163,9 @@ public class ControllerLoged {
             butt[i].setLayoutY(40 + i*100);
             LocalDateTime lc = arrayTask.get(i).getDeadline().toLocalDateTime();
             if(arrayTask.get(i).getStav())butt[i].setId("buttonDone");
-            else /*if(lc < now)*/ butt[i].setId("button");
+            else{ if(lc.isBefore(LocalDateTime.now())) butt[i].setId("buttonPozde");
+                else butt[i].setId("button");
+            }
             butt[i].setTextAlignment(TextAlignment.CENTER);
             butt[i].setPrefSize(600,100);
             int finalI = i;
