@@ -1,6 +1,7 @@
 package sample;
 
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -28,8 +29,8 @@ public class CreateTask {
     boolean administrativa = false;
 
 
-    public static void create() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(CreateTask.class.getResource("taskCreate.fxml"));
+    public static void create(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(CreateTask.class.getResource("FXML/taskCreate.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
         Scene scena = new Scene(root1,400,550);

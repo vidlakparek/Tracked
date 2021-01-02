@@ -212,8 +212,8 @@ public class ControllerLoged {
             Controller.pripojeni = null;
         }
 
-    public void add_task() throws IOException {
-        CreateTask.create();
+    public void add_task(ActionEvent actionEvent) throws IOException {
+        CreateTask.create(actionEvent);
     }
 
     public void refresh() {
