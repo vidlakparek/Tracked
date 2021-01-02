@@ -29,7 +29,7 @@ public class CreateTask {
     boolean administrativa = false;
 
 
-    public static void create(ActionEvent actionEvent) throws IOException {
+    public static void create() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(CreateTask.class.getResource("FXML/taskCreate.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
@@ -128,7 +128,7 @@ public class CreateTask {
             }
             String sql;
             if (dirUser.getValue()==null)sql = "INSERT INTO Tasks (ID, Název,Popisek,Deadline,Priorita,Groups,stav) VALUES ('" + 0 + "','" + name.getText() + "','" + popis.getText() + "','" + deadline.getValue() + "','" + prioritaNum + "','" + group.getValue() + "','" + 0 + "' )";
-            else sql = "INSERT INTO Tasks (ID, Název,Popisek,Deadline,Priorita,dir_users,stav) VALUES ('" + 0 + "','" + name.getText() + "','" + popis.getText() + "','" + deadline.getValue() + "','" + prioritaNum + "','" + dirUser.getValue() + "','" + 0 + "' )";
+            else sql = "INSERT INTO Tasks (ID, Název,Popisek,Deadline,Priorita,dir_users,stav) VALUES ('" + 0 + "','" + name.getText() + "','" + popis.getText() + "','" + deadline.getDateTimeValue() + "','" + prioritaNum + "','" + dirUser.getValue() + "','" + 0 + "' )";
             try {
                 if (dotaz != null) {
                     dotaz.executeUpdate(sql);

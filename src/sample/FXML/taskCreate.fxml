@@ -24,6 +24,6 @@
       <Label fx:id="wrong" layoutX="42.0" layoutY="436.0" visible="false" />
       <ComboBox fx:id="dirUser" layoutX="220.0" layoutY="423.0" prefWidth="150.0" styleClass="choiceBox" stylesheets="@../../CSS/createTask.css" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="420.0" />
       <Label layoutX="30.0" layoutY="426.0" prefHeight="21.0" prefWidth="86.0" stylesheets="@../../CSS/createTask.css" text="Uživatel" />
-      <DateTimePicker fx:id="deadline" layoutX="30.0" layoutY="271.0" prefHeight="25.0" prefWidth="338.0" stylesheets="@../../CSS/createTask.css" />
+      <DateTimePicker fx:id="deadline" format="dd-MMMM-yyyy HH:mm" layoutX="30.0" layoutY="271.0" prefHeight="25.0" prefWidth="338.0" stylesheets="@../../CSS/createTask.css" />
    </children>
 </AnchorPane>
