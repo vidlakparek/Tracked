@@ -169,7 +169,21 @@ public class ControllerLoged {
             LocalDateTime lc = arrayTask.get(i).getDeadline().toLocalDateTime();
             if(arrayTask.get(i).getStav())butt[i].setId("buttonDone");
             else{ if(lc.isBefore(LocalDateTime.now())) butt[i].setId("buttonPozde");
-                else butt[i].setId("button");
+                else {
+                    switch (priority){
+                        case 1 : butt[i].setId("button1");
+                            break;
+                        case 2 : butt[i].setId("button2");
+                            break;
+                        case 3 : butt[i].setId("button3");
+                            break;
+                        case 4 : butt[i].setId("button4");
+                            break;
+                        case 5 : butt[i].setId("button5");
+                            break;
+                        default: ;
+                    }
+            }
             }
             butt[i].setTextAlignment(TextAlignment.CENTER);
             butt[i].setPrefSize(600,100);
