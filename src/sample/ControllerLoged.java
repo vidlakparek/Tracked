@@ -27,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.Date;
 
 
 public class ControllerLoged {
@@ -78,9 +79,7 @@ public class ControllerLoged {
 
     public void initClock() {
 
-        Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
-            timeLabel.setText(LocalDateTime.now().format(formatterLC));
-        }), new KeyFrame(Duration.seconds(1)));
+        Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> timeLabel.setText(LocalDateTime.now().format(formatterLC))), new KeyFrame(Duration.seconds(1)));
         clock.setCycleCount(Animation.INDEFINITE);
         clock.play();
     }
@@ -114,6 +113,10 @@ public class ControllerLoged {
 
     public void addTasks(){
         arrayTask = new ArrayList<>();
+        Date date = new Date();
+        date.setDate(date.getDay()-30);
+        Timestamp datum = new Timestamp(date.getTime());
+        System.out.println(datum);
         try {
             Class.forName( "com.mysql.jdbc.Driver" );
         } catch (ClassNotFoundException e) {
@@ -137,10 +140,15 @@ public class ControllerLoged {
                 else groups = vysledky.getString(7);
                 stav = vysledky.getBoolean(8);
                 solution = vysledky.getString(9);
-                if(groups.equals(vyvoj)||groups.equals(uklid)||groups.equals(administrativa)||dir_users.equals(Controller.userName)) {
-                    arrayTask.add(i, new Task(ID, name, desc, deadline, priority, dir_users, groups, stav, solution));
-                    i++;
+
+                if(groups.equals(vyvoj)||groups.equals(uklid)||groups.equals(administrativa)||dir_users.equals(Controller.userName)){
+                    if (deadline.before(date) && stav) ;
+                    else {
+                        arrayTask.add(i, new Task(ID, name, desc, deadline, priority, dir_users, groups, stav, solution));
+                        i++;
+                    }
                 }
+
             }
             dotaz.close();
         } catch (SQLException throwables) {
