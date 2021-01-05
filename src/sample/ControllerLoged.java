@@ -27,7 +27,6 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.Date;
 
 
 public class ControllerLoged {
@@ -35,8 +34,7 @@ public class ControllerLoged {
     int ID = 0;
     String name = null;
     String desc = null;
-    LocalDateTime deadline = null;
-    Timestamp dead = null;
+    Timestamp deadline = null;
     int priority = 0;
     String dir_users = null;
     String groups = null;
@@ -131,7 +129,7 @@ public class ControllerLoged {
                 ID = vysledky.getInt(1);
                 name = vysledky.getString(2);
                 desc = vysledky.getString(3);
-                dead = vysledky.getTimestamp(4);
+                deadline = vysledky.getTimestamp(4);
                 priority = vysledky.getInt(5);
                 if(vysledky.getString(6)==null)dir_users = "none";
                 else dir_users = vysledky.getString(6);
@@ -140,7 +138,7 @@ public class ControllerLoged {
                 stav = vysledky.getBoolean(8);
                 solution = vysledky.getString(9);
                 if(groups.equals(vyvoj)||groups.equals(uklid)||groups.equals(administrativa)||dir_users.equals(Controller.userName)) {
-                    arrayTask.add(i, new Task(ID, name, desc, dead, priority, dir_users, groups, stav, solution));
+                    arrayTask.add(i, new Task(ID, name, desc, deadline, priority, dir_users, groups, stav, solution));
                     i++;
                 }
             }
@@ -154,7 +152,6 @@ public class ControllerLoged {
     public void initializeButtons(){
         butt = new Button[arrayTask.size()];
         String datum;
-        Timestamp now;
         for(int i = 0;i< arrayTask.size();i++) {
             datum = formatter.format(arrayTask.get(i).getDeadline());
             System.out.println(arrayTask.get(i).getName()+arrayTask.get(i).getDeadline());

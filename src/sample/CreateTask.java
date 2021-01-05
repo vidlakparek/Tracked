@@ -100,6 +100,9 @@ public class CreateTask {
         }
         return users;
     }
+    //public void updateDateTimePicker(){
+        //deadline
+    //}
 
     public void addNewTask() {
         int prioritaNum = switch (String.valueOf(priorita.getValue())) {
@@ -126,9 +129,12 @@ public class CreateTask {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
+            String skupina = String.valueOf(group.getValue());
+            System.out.println(skupina);
+            // TODO: 05.01.2021 Opravit vkládání úkolů do databáze 
             String sql;
-            if (dirUser.getValue()==null)sql = "INSERT INTO Tasks (ID, Název,Popisek,Deadline,Priorita,Groups,stav) VALUES ('" + 0 + "','" + name.getText() + "','" + popis.getText() + "','" + deadline.getValue() + "','" + prioritaNum + "','" + group.getValue() + "','" + 0 + "' )";
-            else sql = "INSERT INTO Tasks (ID, Název,Popisek,Deadline,Priorita,dir_users,stav) VALUES ('" + 0 + "','" + name.getText() + "','" + popis.getText() + "','" + deadline.getDateTimeValue() + "','" + prioritaNum + "','" + dirUser.getValue() + "','" + 0 + "' )";
+            if (dirUser.getValue()!=null)sql = "INSERT INTO Tasks (`ID`, `Název`, `Popisek`, `Deadline`, `Priorita`, `Dir_users`, `Stav`) VALUES ('" + 0 + "','" + name.getText() + "','" + popis.getText() + "','" + deadline.getDateTimeValue() + "','" + prioritaNum + "','" + dirUser.getValue() + "','" + 0 + "' )";
+            else sql = "INSERT INTO Tasks(`ID`, `Název`, `Popisek`, `Deadline`, `Priorita`, `Groups`, `Stav`) VALUES ('"+0+"','" + name.getText() + "','" + popis.getText() + "','" + deadline.getDateTimeValue() + "','"+prioritaNum+"','"+ group.getValue() + "','"+0+"' )";
             try {
                 if (dotaz != null) {
                     dotaz.executeUpdate(sql);
