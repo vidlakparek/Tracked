@@ -1,11 +1,8 @@
 package sample;
 
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 public class Task {
-    // TODO: 01.01.2021 Vyřešit problém s datumem a časem
     private final int ID;
     private final String name;
     private final String desc;

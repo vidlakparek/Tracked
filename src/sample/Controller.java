@@ -55,7 +55,8 @@ public class Controller {
 
         Parent LogPar = null;
         try {
-            LogPar = FXMLLoader.load(getClass().getResource("FXML/loged.fxml"));
+            if(userName.equals("Kuba")) LogPar = FXMLLoader.load(getClass().getResource("FXML/admin.fxml"));
+            else LogPar = FXMLLoader.load(getClass().getResource("FXML/loged.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
