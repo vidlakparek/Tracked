@@ -55,3 +55,65 @@
 -fx-font-size: 15px;
 -fx-text-fill: #2196f3;
 }
+#button1{
+-fx-background-color: #6F975C;
+-fx-transition: background-color 0.4s ease;
+-fx-background-radius:  100px;
+-fx-border-color:#A9A9A9;
+-fx-border-width: 2;
+-fx-border-radius:  100px;
+-fx-border-insets: 5px;
+-fx-background-insets: 5px;
+-fx-font-size: 15px;
+-fx-text-fill: #ffffff;
+}
+#button2{
+-fx-background-color: #D2D462;
+-fx-transition: background-color 0.4s ease;
+-fx-background-radius:  100px;
+-fx-border-color:#A9A9A9;
+-fx-border-width: 2;
+-fx-border-radius:  100px;
+-fx-border-insets: 5px;
+-fx-background-insets: 5px;
+-fx-font-size: 15px;
+-fx-text-fill: #ffffff;
+}
+#button3{
+-fx-background-color: #FF6361;
+-fx-transition: background-color 0.4s ease;
+-fx-background-radius:  100px;
+-fx-border-color:#A9A9A9;
+-fx-border-width: 2;
+-fx-border-radius:  100px;
+-fx-border-insets: 5px;
+-fx-background-insets: 5px;
+-fx-font-size: 15px;
+-fx-text-fill: #ffffff;
+}
+
+#button4{
+-fx-background-color: #BC5090;
+-fx-transition: background-color 0.4s ease;
+-fx-background-radius:  100px;
+-fx-border-color:#A9A9A9;
+-fx-border-width: 2;
+-fx-border-radius:  100px;
+-fx-border-insets: 5px;
+-fx-background-insets: 5px;
+-fx-font-size: 15px;
+-fx-text-fill: #ffffff;
+}
+
+#button5{
+-fx-background-color: #494CA2;
+-fx-transition: background-color 0.4s ease;
+-fx-background-radius:  100px;
+-fx-border-color:#A9A9A9;
+-fx-border-width: 2;
+-fx-border-radius:  100px;
+-fx-border-insets: 5px;
+-fx-background-insets: 5px;
+-fx-font-size: 15px;
+-fx-text-fill: #ffffff;
+}
