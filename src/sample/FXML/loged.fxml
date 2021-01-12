@@ -33,6 +33,6 @@
       <Label fx:id="timeLabel" layoutX="423.0" layoutY="5.0" prefHeight="30.0" prefWidth="98.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="0.0" />
       <Button id="logout" layoutX="593.0" layoutY="1.0" mnemonicParsing="false" onAction="#log_out" prefHeight="30.0" prefWidth="70.0" stylesheets="@../../CSS/style.css" text="Log out" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="0.0" />
        <Button id="closeButt" fx:id="closeButton" layoutX="663.0" layoutY="-1.0" mnemonicParsing="false" onAction="#close" prefHeight="30.0" prefWidth="40.0" stylesheets="@../../CSS/style.css" text="×" AnchorPane.rightAnchor="0.0" />
-      <ScrollPane fx:id="scroll" layoutY="27.0" prefHeight="475.0" prefWidth="700.0" stylesheets="@../../CSS/ScrollPane.css" />
+      <ScrollPane id="scrollPane" fx:id="scroll" layoutY="27.0" prefHeight="475.0" prefWidth="700.0" stylesheets="@../../CSS/ScrollPane.css" />
    </children>
 </AnchorPane>

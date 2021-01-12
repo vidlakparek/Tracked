@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
@@ -19,6 +20,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.awt.*;
 import java.io.IOException;
 import java.sql.*;
 import java.text.Collator;
@@ -171,19 +173,13 @@ public class ControllerLoged {
             if(arrayTask.get(i).getStav())butt[i].setId("buttonDone");
             else{ if(lc.isBefore(LocalDateTime.now())) butt[i].setId("buttonPozde");
                 else {
-                    switch (priority){
-                        case 1 : butt[i].setId("button1");
-                            break;
-                        case 2 : butt[i].setId("button2");
-                            break;
-                        case 3 : butt[i].setId("button3");
-                            break;
-                        case 4 : butt[i].setId("button4");
-                            break;
-                        case 5 : butt[i].setId("button5");
-                            break;
-                        default: ;
-                    }
+                switch (arrayTask.get(i).getPriority()) {
+                    case 1 -> butt[i].setId("button1");
+                    case 2 -> butt[i].setId("button2");
+                    case 3 -> butt[i].setId("button3");
+                    case 4 -> butt[i].setId("button4");
+                    case 5 -> butt[i].setId("button5");
+                }
             }
             }
             butt[i].setTextAlignment(TextAlignment.CENTER);
