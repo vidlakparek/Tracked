@@ -132,11 +132,9 @@ public class CreateTask {
                 throwables.printStackTrace();
             }
             String skupina = String.valueOf(group.getValue());
-            System.out.println(skupina);
-            // TODO: 05.01.2021 Opravit vkládání úkolů do databáze 
             String sql;
-            if (dirUser.getValue()!=null)sql = "INSERT INTO Tasks (`ID`, `Název`, `Popisek`, `Deadline`, `Priorita`, `Dir_users`, `Stav`) VALUES ('" + 0 + "','" + name.getText() + "','" + popis.getText() + "','" + deadline.getDateTimeValue() + "','" + prioritaNum + "','" + dirUser.getValue() + "','" + 0 + "' )";
-            else sql = "INSERT INTO Tasks(`ID`, `Název`, `Popisek`, `Deadline`, `Priorita`, `Groups`, `Stav`) VALUES ('"+0+"','" + name.getText() + "','" + popis.getText() + "','" + deadline.getDateTimeValue() + "','"+prioritaNum+"','"+ group.getValue() + "','"+0+"' )";
+            if (dirUser.getValue()!=null)sql = "INSERT INTO Tasks (`ID`, `Název`, `Popisek`, `Deadline`, `Priorita`, `Dir_users`, `Stav`,`userSet`) VALUES ('" + 0 + "','" + name.getText() + "','" + popis.getText() + "','" + deadline.getDateTimeValue() + "','" + prioritaNum + "','" + dirUser.getValue() + "','" + 0 + "','"+Controller.getUserName()+"' )";
+            else sql = "INSERT INTO Tasks(`ID`, `Název`, `Popisek`, `Deadline`, `Priorita`, `Groups`, `Stav`,`userSet`) VALUES ('"+0+"','" + name.getText() + "','" + popis.getText() + "','" + deadline.getDateTimeValue() + "','"+prioritaNum+"','"+ group.getValue() + "','"+0+"','"+Controller.getUserName()+"' )";
             try {
                 if (dotaz != null) {
                     dotaz.executeUpdate(sql);

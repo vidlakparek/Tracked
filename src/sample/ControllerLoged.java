@@ -119,7 +119,6 @@ public class ControllerLoged {
         Date date = new Date();
         date.setDate(date.getDay()-30);
         Timestamp datum = new Timestamp(date.getTime());
-        System.out.println(datum);
         try {
             Class.forName( "com.mysql.jdbc.Driver" );
         } catch (ClassNotFoundException e) {
@@ -165,7 +164,6 @@ public class ControllerLoged {
         String datum;
         for(int i = 0;i< arrayTask.size();i++) {
             datum = formatter.format(arrayTask.get(i).getDeadline());
-            System.out.println(arrayTask.get(i).getName()+arrayTask.get(i).getDeadline());
             butt[i] = new Button(arrayTask.get(i).getName()+ "\n"+"\n"+datum);
             butt[i].setLayoutX(10);
             butt[i].setLayoutY(40 + i*100);
