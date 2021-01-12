@@ -66,6 +66,7 @@ public class ControllerLoged {
 
 
 
+
     public void initialize(){
         initClock();
         groupInitialize();
@@ -191,7 +192,7 @@ public class ControllerLoged {
             butt[i].setOnAction(event -> {
                 ShowTask.ID=finalI;
                 try {
-                    ShowTask.create();
+                    ShowTask.create(this);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -232,7 +233,7 @@ public class ControllerLoged {
         }
 
     public void add_task() throws IOException {
-        CreateTask.create();
+        CreateTask.create(this);
     }
 
     public void refresh() {

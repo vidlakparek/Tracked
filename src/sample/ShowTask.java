@@ -19,6 +19,7 @@ import java.time.format.DateTimeFormatter;
 
 public class ShowTask {
 
+    private static ControllerLoged a;
     public Label idAndName;
     public TextArea popis;
     public Label deadline;
@@ -34,7 +35,8 @@ public class ShowTask {
     DateTimeFormatter formatterLC = DateTimeFormatter.ofPattern("dd. MMMM HH:mm");
 
 
-    public static void create() throws IOException{
+    public static void create(ControllerLoged cl) throws IOException{
+        a=cl;
         FXMLLoader fxmlLoader = new FXMLLoader(CreateTask.class.getResource("FXML/showTask.fxml"));
         Parent root1 = fxmlLoader.load();
         Stage stage = new Stage();
@@ -75,6 +77,7 @@ public class ShowTask {
             throwables.printStackTrace();
         }
         stav.setText(done(ControllerLoged.arrayTask.get(ID).getStav()));
+        a.refresh();
     }
 
 

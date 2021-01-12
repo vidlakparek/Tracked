@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import tornadofx.control.DateTimePicker;
 
 public class CreateTask {
+    private static ControllerLoged a;
     public ComboBox priorita;
     public ComboBox group;
     public Button closeButton;
@@ -29,7 +30,8 @@ public class CreateTask {
     boolean administrativa = false;
 
 
-    public static void create() throws IOException {
+    public static void create(ControllerLoged cl) throws IOException {
+        a = cl;
         FXMLLoader fxmlLoader = new FXMLLoader(CreateTask.class.getResource("FXML/taskCreate.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
@@ -147,6 +149,7 @@ public class CreateTask {
             }
         }
         wrong.setVisible(true);
+        a.refresh();
     }
 
     public void close() {
