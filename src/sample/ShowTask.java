@@ -31,6 +31,7 @@ public class ShowTask {
     protected static Scene scena;
     public TextArea solution;
     public Button Submit;
+    public String skupina;
     DateFormat formater = new SimpleDateFormat("dd. MMMM yyyy HH:mm");
     DateTimeFormatter formatterLC = DateTimeFormatter.ofPattern("dd. MMMM HH:mm");
 
@@ -53,10 +54,20 @@ public class ShowTask {
         popis.setText(ControllerLoged.arrayTask.get(ID).getDesc());
         deadline.setText(formater.format(ControllerLoged.arrayTask.get(ID).getDeadline()));
         priorita.setText(prioritaText(ControllerLoged.arrayTask.get(ID).getPriority()));
-        if (!ControllerLoged.arrayTask.get(ID).getDir_users().equals("none"))group.setText(ControllerLoged.arrayTask.get(ID).getDir_users());
-        else group.setText(ControllerLoged.arrayTask.get(ID).getGroups());
+        group.setText(getSkupina());
         stav.setText(done(ControllerLoged.arrayTask.get(ID).getStav()));
         solution.setText(ControllerLoged.arrayTask.get(ID).getSolution());
+    }
+    public String getSkupina(){
+        switch (ControllerLoged.arrayTask.get(ID).getGroup()){
+            case 1: return "Vývoj";
+
+            case 2: return "Administrativa";
+
+            case 3:return "Úklid";
+
+            default: return Controller.getUserName();
+        }
     }
 
     public void submit(){
@@ -77,7 +88,7 @@ public class ShowTask {
             throwables.printStackTrace();
         }
         stav.setText(done(ControllerLoged.arrayTask.get(ID).getStav()));
-        a.refresh();
+        //a.refresh();
     }
 
 

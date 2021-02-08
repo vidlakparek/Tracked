@@ -10,10 +10,6 @@
 -fx-font-size: 15px;
 -fx-text-fill: #2196f3;
 }
-#arPane{
--fx-background-image: url("sample/Slon.jpg");
--fx-background-position: center center;
-}
 #buttonDone{
 -fx-background-color: #ffffff;
 -fx-transition: background-color 0.4s ease;

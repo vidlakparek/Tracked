@@ -1,11 +1,13 @@
 package sample;
 
-
-import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -25,9 +27,7 @@ public class CreateTask {
     public TextArea popis;
     public Label wrong;
     public ComboBox dirUser;
-    boolean vyvoj = false;
-    boolean uklid = false;
-    boolean administrativa = false;
+    ArrayList<Integer>groups;
 
 
     public static void create(ControllerLoged cl) throws IOException {
@@ -43,19 +43,15 @@ public class CreateTask {
 
     }
     public void initialize() {
-        groupInitialize();
         priorita.getItems().addAll("1- Velmi nízká", "2 - Nízká ", "3 - Normální","4 - Vysoká","5 - Urgentní");
-
-        if(vyvoj)group.getItems().add("Vývoj");
-        if(uklid)group.getItems().add("Úklid");
-        if(administrativa)group.getItems().add("Administrativa");
-
+        groupRole();
         dirUser.getItems().removeAll();
         dirUser.getItems().addAll(getAllUsers());
 
     }
 
-    public void groupInitialize(){
+    public void groupRole(){
+        groups = new ArrayList<Integer>();
         try {
             Class.forName( "com.mysql.jdbc.Driver" );
         } catch (ClassNotFoundException e) {
@@ -63,18 +59,20 @@ public class CreateTask {
         }
         Connection conn = Controller.getConnection();
         try {
-            PreparedStatement dotaz = conn.prepareStatement("SELECT * FROM Users");
+            PreparedStatement dotaz = conn.prepareStatement("SELECT IDTeam FROM Mix WHERE IDUser = '"+ControllerLoged.ID_user+"' AND IDRole = 2");
             ResultSet vysledky = dotaz.executeQuery();
-
             while (vysledky.next()) {
-                if(vysledky.getString(2).equals(Controller.getUserName())){
-                    if(vysledky.getString(3).substring(1).equals("1"))vyvoj=true;
-                    if(vysledky.getString(4).substring(1).equals("1"))uklid=true;
-                    if(vysledky.getString(5).substring(1).equals("1"))administrativa=true;
-                }
+                groups.add(vysledky.getInt("IDTeam"));
             }
             dotaz.close();
-        } catch (SQLException throwables) {
+            for (int skupina:groups){
+                PreparedStatement dotaz1 = conn.prepareStatement("SELECT `NazevSkupiny` FROM `Groups` WHERE `IDGroup` = '"+skupina+"'");
+                ResultSet vysledky1 = dotaz1.executeQuery();
+                if(vysledky1.next())group.getItems().add(vysledky1.getString("NazevSkupiny"));
+            }
+
+        }
+        catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
@@ -88,7 +86,7 @@ public class CreateTask {
         }
         Connection conn = Controller.getConnection();
         try {
-            PreparedStatement dotaz = conn.prepareStatement("SELECT Login FROM Users");
+            PreparedStatement dotaz = conn.prepareStatement("SELECT Name FROM Users");
             ResultSet vysledky = dotaz.executeQuery();
 
 
@@ -102,9 +100,6 @@ public class CreateTask {
         }
         return users;
     }
-    //public void updateDateTimePicker(){
-        //deadline
-    //}
 
     public void addNewTask() {
         int prioritaNum = switch (String.valueOf(priorita.getValue())) {
@@ -115,6 +110,7 @@ public class CreateTask {
             case "5 - Urgentní" -> 5;
             default -> 0;
         };
+
         if (name.getText().equals("") || popis.getText().equals("") || deadline == null || prioritaNum == 0 || (group.getValue() == "" && dirUser.getValue() == "")) {
             wrong.setText("Vyplňte prosím všechny povinné údaje!");
         } else {
@@ -131,13 +127,18 @@ public class CreateTask {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-            String skupina = String.valueOf(group.getValue());
-            String sql;
-            if (dirUser.getValue()!=null)sql = "INSERT INTO Tasks (`ID`, `Název`, `Popisek`, `Deadline`, `Priorita`, `Dir_users`, `Stav`,`userSet`) VALUES ('" + 0 + "','" + name.getText() + "','" + popis.getText() + "','" + deadline.getDateTimeValue() + "','" + prioritaNum + "','" + dirUser.getValue() + "','" + 0 + "','"+Controller.getUserName()+"' )";
-            else sql = "INSERT INTO Tasks(`ID`, `Název`, `Popisek`, `Deadline`, `Priorita`, `Groups`, `Stav`,`userSet`) VALUES ('"+0+"','" + name.getText() + "','" + popis.getText() + "','" + deadline.getDateTimeValue() + "','"+prioritaNum+"','"+ group.getValue() + "','"+0+"','"+Controller.getUserName()+"' )";
+            int skupina = 0;
+            switch (String.valueOf(group.getValue())){
+                case "Vývoj": skupina=1;
+                    break;
+                case "Administrativa": skupina=2;
+                    break;
+                case "Úklid": skupina=3;
+                    break;
+            }
             try {
                 if (dotaz != null) {
-                    dotaz.executeUpdate(sql);
+                    dotaz.executeUpdate("INSERT INTO Tasks(`ID`, `Název`, `Popisek`, `Deadline`, `Priorita`, `Stav`,`userSet`, `Groups`) VALUES ('"+0+"','" + name.getText() + "','" + popis.getText() + "','" + deadline.getDateTimeValue() + "','"+prioritaNum+"','"+0+"','"+Controller.getUserName()+"','"+ skupina + "' )");
                 }
 
                 dotaz.close();
@@ -147,7 +148,7 @@ public class CreateTask {
             }
         }
         wrong.setVisible(true);
-        a.refresh();
+        //a.refresh();
     }
 
     public void close() {

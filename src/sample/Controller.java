@@ -14,9 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 
 public class Controller {
@@ -29,14 +27,20 @@ public class Controller {
     public AnchorPane mainPane;
     static String userName;
     public Button closeButton;
+    private String name = "Tracked";
+    private String password = "Tracked-123";
 
-
+    /**
+     * Přihlášení
+     * Metoda se přihlásí přes admin účet a poté ověří zda je uživate
+     * @param actionEvent
+     */
     public void login(ActionEvent actionEvent) {
-           try {
-                Class.forName("com.mysql.jdbc.Driver");
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
         try {
             pripojeni = DriverManager.getConnection("jdbc:mysql://89.203.248.248:3306/Tracked?user="+mail.getText()+"&password="+pass.getText()+"&useUnicode=true&characterEncoding=utf8&useSSL=false");
@@ -51,12 +55,11 @@ public class Controller {
 
     }
 
-    public void change(ActionEvent event){
+        public void change(ActionEvent event){
 
         Parent LogPar = null;
         try {
-            if(userName.equals("root")) LogPar = FXMLLoader.load(getClass().getResource("FXML/admin.fxml"));
-            else LogPar = FXMLLoader.load(getClass().getResource("FXML/loged.fxml"));
+            LogPar = FXMLLoader.load(getClass().getResource("FXML/loged.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -70,6 +73,10 @@ public class Controller {
         okno.show();
     }
 
+    /**
+     * Metoda vrací aktuální připojení.
+     * @return připojení
+     */
     public static Connection getConnection(){
         return pripojeni;
     }
