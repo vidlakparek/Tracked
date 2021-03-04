@@ -31,7 +31,6 @@ public class ShowTask {
     protected static Scene scena;
     public TextArea solution;
     public Button Submit;
-    public String skupina;
     DateFormat formater = new SimpleDateFormat("dd. MMMM yyyy HH:mm");
     DateTimeFormatter formatterLC = DateTimeFormatter.ofPattern("dd. MMMM HH:mm");
 

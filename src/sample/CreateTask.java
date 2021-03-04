@@ -69,6 +69,24 @@ public class CreateTask {
         }
     }
 
+    public void addAllUsers(){
+        try {
+            Class.forName( "com.mysql.jdbc.Driver" );
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        Connection conn = Controller.getConnection();
+        try {
+            PreparedStatement dotaz = conn.prepareStatement("SELECT Name FROM Users");
+            ResultSet vysledky = dotaz.executeQuery();
+            while (vysledky.next()){
+                dirUser.getItems().add(vysledky.getString("Name"));
+            }
+        }catch (SQLException throwables){
+            throwables.printStackTrace();
+        }
+    }
+
     public void addNewTask() {
         int prioritaNum = switch (String.valueOf(priorita.getValue())) {
             case "1- Velmi nízká" -> 1;

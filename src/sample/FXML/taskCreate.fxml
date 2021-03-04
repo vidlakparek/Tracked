@@ -10,7 +10,6 @@
 
 <AnchorPane id="pane" prefHeight="550.0" prefWidth="400.0" stylesheets="@../../CSS/createTask.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CreateTask">
    <children>
-      <Label layoutX="33.0" layoutY="37.0" stylesheets="@../../CSS/createTask.css" text="Název" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="35.0" />
       <TextField fx:id="name" layoutX="33.0" layoutY="67.0" prefHeight="42.0" prefWidth="331.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="65.0" />
       <Label layoutX="33.0" layoutY="119.0" stylesheets="@../../CSS/createTask.css" text="Popisek" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="115.0" />
       <TextArea fx:id="popis" layoutX="83.0" layoutY="143.0" prefHeight="90.0" prefWidth="280.0" wrapText="true" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="145.0" />
@@ -23,5 +22,6 @@
       <Button id="closeButt" fx:id="closeButton" layoutX="337.0" layoutY="19.0" mnemonicParsing="false" onAction="#close" stylesheets="@../../CSS/createTask.css" text="×" />
       <Label fx:id="wrong" layoutX="42.0" layoutY="436.0" visible="false" />
       <DateTimePicker fx:id="deadline" format="dd-MMMM-yyyy HH:mm" layoutX="30.0" layoutY="271.0" prefHeight="25.0" prefWidth="338.0" stylesheets="@../../CSS/createTask.css" />
+      <ComboBox fx:id="dirUser" layoutX="218.0" layoutY="423.0" prefWidth="150.0" styleClass="choiceBox" stylesheets="@../../CSS/createTask.css" />
    </children>
 </AnchorPane>
