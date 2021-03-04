@@ -120,15 +120,39 @@ public class CreateTask {
                 case "Úklid" -> 3;
                 default -> 0;
             };
-            try {
-                if (dotaz != null) {
-                    dotaz.executeUpdate("INSERT INTO Tasks(`ID`, `Název`, `Popisek`, `Deadline`, `Priorita`, `Stav`,`userSet`, `Groups`) VALUES ('"+0+"','" + name.getText() + "','" + popis.getText() + "','" + deadline.getDateTimeValue() + "','"+prioritaNum+"','"+0+"','"+Controller.getUserName()+"','"+ skupina + "' )");
+            int dirUserInt = 0;
+            if(skupina==0) {
+                try {
+                    PreparedStatement selDotaz = conn.prepareStatement("SELECT * FROM `Groups` WHERE NazevSkupiny = '" + String.valueOf(dirUser.getValue()).trim() + "'");
+                    ResultSet vysledky = selDotaz.executeQuery();
+                    while (vysledky.next()){
+                        dirUserInt = vysledky.getInt(1);
+                    }
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
                 }
+                try {
+                    if (dotaz != null) {
+                        dotaz.executeUpdate("INSERT INTO Tasks(`ID`, `Název`, `Popisek`, `Deadline`, `Priorita`, `Stav`,`userSet`, `Groups`) VALUES ('" + 0 + "','" + name.getText() + "','" + popis.getText() + "','" + deadline.getDateTimeValue() + "','" + prioritaNum + "','" + 0 + "','" + Controller.getUserName() + "','" + dirUserInt + "' )");
+                    }
 
-                dotaz.close();
-                close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+                    dotaz.close();
+                    close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+            else {
+                try {
+                    if (dotaz != null) {
+                        dotaz.executeUpdate("INSERT INTO Tasks(`ID`, `Název`, `Popisek`, `Deadline`, `Priorita`, `Stav`,`userSet`, `Groups`) VALUES ('" + 0 + "','" + name.getText() + "','" + popis.getText() + "','" + deadline.getDateTimeValue() + "','" + prioritaNum + "','" + 0 + "','" + Controller.getUserName() + "','" + skupina + "' )");
+                    }
+
+                    dotaz.close();
+                    close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
             }
         }
         wrong.setVisible(true);
