@@ -121,7 +121,7 @@ public class CreateTask {
             }
         }
         wrong.setVisible(true);
-        //a.refresh();
+        a.refresh();
     }
 
     public void close() {
