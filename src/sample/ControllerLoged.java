@@ -111,7 +111,6 @@ public class ControllerLoged {
             ResultSet vysledky = dotaz.executeQuery();
             while (vysledky.next()){
                 IDTeam.add(i,vysledky.getInt("IDTeam"));
-                System.out.println(IDTeam.get(i));
                 i++;
             }
             dotaz.close();

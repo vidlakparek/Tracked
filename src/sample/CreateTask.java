@@ -1,14 +1,9 @@
 package sample;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.input.InputMethodEvent;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -48,7 +43,7 @@ public class CreateTask {
     }
 
     public void groupRole(){
-        groups = new ArrayList<Integer>();
+        groups = new ArrayList<>();
         try {
             Class.forName( "com.mysql.jdbc.Driver" );
         } catch (ClassNotFoundException e) {
@@ -100,15 +95,12 @@ public class CreateTask {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-            int skupina = 0;
-            switch (String.valueOf(group.getValue())){
-                case "Vývoj": skupina=1;
-                    break;
-                case "Administrativa": skupina=2;
-                    break;
-                case "Úklid": skupina=3;
-                    break;
-            }
+            int skupina = switch (String.valueOf(group.getValue())) {
+                case "Vývoj" -> 1;
+                case "Administrativa" -> 2;
+                case "Úklid" -> 3;
+                default -> 0;
+            };
             try {
                 if (dotaz != null) {
                     dotaz.executeUpdate("INSERT INTO Tasks(`ID`, `Název`, `Popisek`, `Deadline`, `Priorita`, `Stav`,`userSet`, `Groups`) VALUES ('"+0+"','" + name.getText() + "','" + popis.getText() + "','" + deadline.getDateTimeValue() + "','"+prioritaNum+"','"+0+"','"+Controller.getUserName()+"','"+ skupina + "' )");
@@ -121,7 +113,7 @@ public class CreateTask {
             }
         }
         wrong.setVisible(true);
-        //a.refresh();
+        a.refresh();
     }
 
     public void close() {
