@@ -40,6 +40,7 @@ public class CreateTask {
     public void initialize() {
         priorita.getItems().addAll("1- Velmi nízká", "2 - Nízká ", "3 - Normální","4 - Vysoká","5 - Urgentní");
         groupRole();
+        addAllUsers();
     }
 
     public void groupRole(){
@@ -77,7 +78,7 @@ public class CreateTask {
         }
         Connection conn = Controller.getConnection();
         try {
-            PreparedStatement dotaz = conn.prepareStatement("SELECT Name FROM Users");
+            PreparedStatement dotaz = conn.prepareStatement("SELECT * FROM Users");
             ResultSet vysledky = dotaz.executeQuery();
             while (vysledky.next()){
                 dirUser.getItems().add(vysledky.getString("Name"));
