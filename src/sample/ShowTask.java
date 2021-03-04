@@ -59,21 +59,27 @@ public class ShowTask {
         solution.setText(ControllerLoged.arrayTask.get(ID).getSolution());
     }
     public String getSkupina(){
-        switch (ControllerLoged.arrayTask.get(ID).getGroup()){
-            case 1: return "Vývoj";
-
-            case 2: return "Administrativa";
-
-            case 3:return "Úklid";
-
-            default: return Controller.getUserName();
+        try {
+            Class.forName( "com.mysql.jdbc.Driver" );
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
+        Connection conn = Controller.getConnection();
+        try {
+            PreparedStatement dotaz = conn.prepareStatement("SELECT `NazevSkupiny` FROM `Groups` WHERE `IDGroup` = '"+ControllerLoged.arrayTask.get(ID).getGroup()+"'");
+            ResultSet vysledky = dotaz.executeQuery();
+            if(vysledky.next())return vysledky.getString("NazevSkupiny");
+            dotaz.close();
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return "";
     }
 
     public void submit(){
         String sqlUpdate = "UPDATE Tasks SET Stav = 1, Solution = '"+solution.getText()+"\nOdevzdal uživatel: "+Controller.userName+"\n"+ LocalDateTime.now().format(formatterLC) +"' WHERE ID ="+ControllerLoged.arrayTask.get(ID).getID();
-            stav.setText("Dokončeno");
-
+        stav.setText("Dokončeno");
         try {
             Class.forName( "com.mysql.jdbc.Driver" );
         } catch (ClassNotFoundException e) {
@@ -87,8 +93,7 @@ public class ShowTask {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        stav.setText(done(ControllerLoged.arrayTask.get(ID).getStav()));
-        //a.refresh();
+        a.refresh();
     }
 
 

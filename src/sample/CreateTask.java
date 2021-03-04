@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -40,14 +41,10 @@ public class CreateTask {
         stage.setScene(scena);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
-
     }
     public void initialize() {
         priorita.getItems().addAll("1- Velmi nízká", "2 - Nízká ", "3 - Normální","4 - Vysoká","5 - Urgentní");
         groupRole();
-        dirUser.getItems().removeAll();
-        dirUser.getItems().addAll(getAllUsers());
-
     }
 
     public void groupRole(){
@@ -75,30 +72,6 @@ public class CreateTask {
         catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-    }
-
-    public ArrayList<String> getAllUsers(){
-        ArrayList<String>users = new ArrayList<>();
-        try {
-            Class.forName( "com.mysql.jdbc.Driver" );
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        Connection conn = Controller.getConnection();
-        try {
-            PreparedStatement dotaz = conn.prepareStatement("SELECT Name FROM Users");
-            ResultSet vysledky = dotaz.executeQuery();
-
-
-            while (vysledky.next()) {
-                users.add(vysledky.getString(1));
-                }
-            dotaz.close();
-            }
-         catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return users;
     }
 
     public void addNewTask() {

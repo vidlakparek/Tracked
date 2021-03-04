@@ -86,6 +86,9 @@ public class ControllerLoged {
         clock.play();
     }
 
+    /**
+     * Metoda inicializuje všechny skupiny ve kterých se uživatel nachází.
+     */
     public void groupInitialize(){
         int i = 0;
         IDTeam = new ArrayList();
@@ -245,26 +248,6 @@ public class ControllerLoged {
                 clear_done();
                 initializeButtons();
             }
-        }
-        else if(ukolyUzivatele.isSelected()){
-            if (sortByName.isSelected()) {
-                addTasks();
-                //show_dir_userOnly();
-                sort_by_name();
-            } else if (sortByPriority.isSelected()) {
-                addTasks();
-                //show_dir_userOnly();
-                sort_by_priority();
-            } else if (sortByDeadline.isSelected()) {
-                addTasks();
-                //show_dir_userOnly();
-                sort_by_deadline();
-            }
-            else {
-                addTasks();
-                //show_dir_userOnly();
-                initializeButtons();
-            }
         }else {
             if (sortByName.isSelected()) {
                 addTasks();
@@ -328,21 +311,6 @@ public class ControllerLoged {
         }
         else refresh();
     }
-
-   /* public void show_dir_userOnly(){
-        if(ukolyUzivatele.isSelected()){
-            for(int i = 0;i<arrayTask.size();i++){
-                if(!arrayTask.get(i).getDir_users().equals(Controller.getUserName())) {
-                    arrayTask.remove(i);
-                    i--;
-                }
-            }
-        }
-        else {
-            addTasks();
-        }
-        initializeButtons();
-    }*/
 
 
     Comparator<Task> comparatorPriority = (t1, t2) -> {
