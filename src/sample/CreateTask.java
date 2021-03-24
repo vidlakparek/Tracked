@@ -179,6 +179,9 @@ public class CreateTask {
         a.refresh();
     }
 
+    /**
+     * Ukončuje aplikaci po kliknutí na tlačitko pro ukončení.
+     */
     public void close() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
