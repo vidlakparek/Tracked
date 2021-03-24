@@ -119,6 +119,9 @@ public class ControllerLoged {
         }
     }
 
+    /**
+     * Metoda vytvoří proměnou typu ArrayList do která následně přidává jednotlivé úkoly, které získa dotazem SELECT z databáze
+     */
     public void addTasks(){
         arrayTask = new ArrayList<>();
         Date date = new Date();
@@ -156,6 +159,10 @@ public class ControllerLoged {
         }
     }
 
+    /**
+     * Vytvoří objekty do kterých jsou následně zadávány paramtery jednotlivých úkolů
+     * Nastaví vzhled danných objektů a přiřadí metodu onAction
+     */
         public void initializeButtons(){
             butt = new Button[arrayTask.size()];
             String datum;
@@ -197,6 +204,11 @@ public class ControllerLoged {
 
         }
 
+    /**
+     * Metoda se volá po stisknutí na tlačítko "Log out"
+     * Metoda odhlásí uživatele z aplikace a vrátí se na úvodní obrazovku
+     * @param event
+     */
     public void log_out(ActionEvent event) {
 
         try {
@@ -223,9 +235,17 @@ public class ControllerLoged {
             Controller.pripojeni = null;
         }
 
+    /**
+     * Metoda volá metodu create třídy CreateTask
+      * @throws IOException
+     */
     public void add_task() throws IOException {
         CreateTask.create(this);
     }
+
+    /**
+     * Metoda aktualizuje seznam zobrazovaných úkolů a následně je ředí podle zvolených parametrů.
+     */
 
     public void refresh() {
         if(clearDone.isSelected()){
@@ -265,6 +285,9 @@ public class ControllerLoged {
         }
     }
 
+    /**
+     * Metoda skryje úkoly, které jsou už splněny.
+     */
     public void clear_done() {
         if(clearDone.isSelected()){
             for(int i =0;i<arrayTask.size();i++) {
@@ -280,6 +303,9 @@ public class ControllerLoged {
 
     }
 
+    /**
+     * Metoda seřadí objekty abecedně podle atributu name
+     */
     public void sort_by_name() {
         if(sortByName.isSelected()){
             sortByPriority.setSelected(false);
@@ -290,6 +316,9 @@ public class ControllerLoged {
         else refresh();
     }
 
+    /**
+     * Metoda seřadí objekty podle atributu priority
+     */
     public void sort_by_priority() {
         if(sortByPriority.isSelected()) {
             sortByName.setSelected(false);
@@ -301,6 +330,9 @@ public class ControllerLoged {
         else refresh();
     }
 
+    /**
+     * Metoda seřadí objekty podle atributu deadline - úkol, který má být splněn za nejmenší časový úsek se zobrazuje jako první
+     */
     public void sort_by_deadline() {
         if(sortByDeadline.isSelected()) {
             sortByName.setSelected(false);

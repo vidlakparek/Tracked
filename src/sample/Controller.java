@@ -55,6 +55,10 @@ public class Controller {
 
     }
 
+    /**
+     * Změní vzhled aplikace pro přihlášeného uživatele.
+     * @param event
+     */
         public void change(ActionEvent event){
 
         Parent LogPar = null;
@@ -80,12 +84,19 @@ public class Controller {
     public static Connection getConnection(){
         return pripojeni;
     }
+    /**
+     * Metoda vrací aktuální uživatelské jméno.
+     * @return userName
+     */
     public static String getUserName(){return userName;}
 
     public void onEnter(ActionEvent ae){
         login(ae);
     }
 
+    /**
+     * Ukončuje aplikaci po kliknutí na tlačitko pro ukončení.
+     */
     public void close() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();

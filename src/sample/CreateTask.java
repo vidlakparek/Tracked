@@ -29,7 +29,7 @@ public class CreateTask {
     public static void create(ControllerLoged cl) throws IOException {
         a = cl;
         FXMLLoader fxmlLoader = new FXMLLoader(CreateTask.class.getResource("FXML/taskCreate.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
+        Parent root1 = fxmlLoader.load();
         Stage stage = new Stage();
         Scene scena = new Scene(root1,400,550);
         scena.setFill(Color.TRANSPARENT);
