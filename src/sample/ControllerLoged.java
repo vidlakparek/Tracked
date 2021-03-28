@@ -65,8 +65,9 @@ public class ControllerLoged {
     DateFormat formatter = new SimpleDateFormat("dd. MMMM yyyy HH:mm");
 
 
-
-
+    /**
+     * Metoda z incializuje okno do požadové podoby
+     */
     public void initialize(){
         initClock();
         groupInitialize();
@@ -79,6 +80,9 @@ public class ControllerLoged {
 
     }
 
+    /**
+     * Inicializace hodin
+     */
     public void initClock() {
 
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> timeLabel.setText(LocalDateTime.now().format(formatterLC))), new KeyFrame(Duration.seconds(1)));
@@ -353,12 +357,18 @@ public class ControllerLoged {
         }
     };
 
+    /**
+     * Metoda uzavře okno
+     */
     public void close() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
         
     }
 
+    /**
+     * Lokalizovaný komparátor
+     */
     private static class nameComparator implements Comparator<Task>{
         Collator czechCollator = Collator.getInstance(new Locale("cs","CZ"));
         public int compare(Task t1, Task t2){

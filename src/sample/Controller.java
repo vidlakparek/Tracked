@@ -27,8 +27,8 @@ public class Controller {
     public AnchorPane mainPane;
     static String userName;
     public Button closeButton;
-    private String name = "Tracked";
-    private String password = "Tracked-123";
+    private final String name = "Tracked";
+    private final String password = "Tracked-123";
 
     /**
      * Přihlášení
@@ -90,6 +90,10 @@ public class Controller {
      */
     public static String getUserName(){return userName;}
 
+    /**
+     * Zavolá metodu login
+     * @param ae
+     */
     public void onEnter(ActionEvent ae){
         login(ae);
     }
