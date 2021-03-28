@@ -14,7 +14,7 @@ public class Task {
 
 
     /**
-     * Parametrický konstruktor objektu Task
+     * Konstruktor vytvoří objekt Task.
      * @param ID
      * @param name
      * @param desc
@@ -37,60 +37,59 @@ public class Task {
     }
 
     /**
-     * Getter pro parametr ID
-     * @return
+     * Metoda vrátí ID úkolu.
+     * @return ID
      */
     public int getID(){
         return ID;
     }
-
     /**
-     * Getter pro parametr Name
-     * @return
+     * Metoda vrátí název úkolu.
+     * @return name
      */
     public String getName(){
         return name;
     }
-
     /**
-     * Getter pro parametr Desc
-     * @return
+     * Metoda vrátí popis úkolu.
+     * @return desc
      */
     public String getDesc(){
         return desc;
     }
-
     /**
-     * Getter pro parametr Deadline
-     * @return
+     * Metoda vrátí čas odevzdání úkolu.
+     * @return deadline
      */
-    public Timestamp getDeadline(){ return deadline; }
-
+    public Timestamp getDeadline(){
+        return deadline;
+    }
     /**
-     * Getter pro parametr Priority
-     * @return
+     * Metoda vrátí prioritu úkolu.
+     * @return priority
      */
     public int getPriority(){
         return priority;
     }
-
     /**
-     * Getter pro parametr Stav
-     * @return
+     * Metoda vrátí stav úkolu.
+     * @return stav
      */
     public boolean getStav(){
         return stav;
     }
-
     /**
-     * Getter pro parametr Solution
-     * @return
+     * Metoda vrátí řešení úkolu.
+     * @return solution
      */
-    public String getSolution(){return solution;}
-
+    public String getSolution(){
+        return solution;
+    }
     /**
-     * Getter pro parametr Group
-     * @return
+     * Metoda vrátí skupinu pro kterou byl úkol zadán.
+     * @return group
      */
-    public int getGroup(){return group;}
+    public int getGroup(){
+        return group;
+    }
 }

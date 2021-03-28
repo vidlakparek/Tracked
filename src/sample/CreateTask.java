@@ -37,12 +37,21 @@ public class CreateTask {
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
     }
+
+    /**
+     * Metoda načte priority do Comboboxu priorita.
+     * Spustí metodu groupRole a addAllUsers
+     */
     public void initialize() {
         priorita.getItems().addAll("1- Velmi nízká", "2 - Nízká ", "3 - Normální","4 - Vysoká","5 - Urgentní");
         groupRole();
         addAllUsers();
     }
 
+    /**
+     * Metoda se připojí k databázi pomocí getConnection ze třídy Controller.
+     * Pomocí výběrového sql dotazu načte skupiny ve kterých má uživatel práva přidávat úkoly a přidá je do ComboBoxu groups.
+     */
     public void groupRole(){
         groups = new ArrayList<>();
         try {
@@ -70,6 +79,11 @@ public class CreateTask {
         }
     }
 
+    /**
+     * Metoda se připojí k databázi pomocí getConnection ze třídy Controller.
+     * Pomocí výběrového sql dotazu načte všechny uživatele, kterým přihlášený uživatel může zadávat úkoly a přidá je do ComboBoxu dirUser.
+     *
+     */
     public void addAllUsers(){
         try {
             Class.forName( "com.mysql.jdbc.Driver" );
@@ -87,6 +101,12 @@ public class CreateTask {
             throwables.printStackTrace();
         }
     }
+
+    /**
+     * Metoda ověří zda jsou všechny vstupy zadané správně.
+     * Metoda se připojí k databázi pomocí getConnection ze třídy Controller.
+     * Pomocí sql INSERT INTO nahraje uživatelem zadaná data do databáze.
+     */
 
     public void addNewTask() {
         int prioritaNum = switch (String.valueOf(priorita.getValue())) {
@@ -159,6 +179,9 @@ public class CreateTask {
         a.refresh();
     }
 
+    /**
+     * Ukončuje aplikaci po kliknutí na tlačitko pro ukončení.
+     */
     public void close() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
