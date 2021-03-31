@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"sample","l":"Controller"},{"p":"sample","l":"ControllerLoged"},{"p":"sample","l":"CreateTask"},{"p":"sample","l":"Main"},{"p":"sample","l":"ControllerLoged.nameComparator"},{"p":"sample","l":"ShowTask"},{"p":"sample","l":"Task"}];updateSearchResults();
