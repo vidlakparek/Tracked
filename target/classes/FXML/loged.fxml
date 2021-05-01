@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="arPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ControllerLoged">
+   <children>
+      <MenuBar layoutX="-6.0" layoutY="2.0" prefHeight="30.0" prefWidth="498.0" stylesheets="@../CSS/style.css" AnchorPane.leftAnchor="-10.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Řazení">
+            <items>
+                  <CheckMenuItem fx:id="sortByName" mnemonicParsing="false" onAction="#sort_by_name" text="Podle názvu" />
+                  <CheckMenuItem fx:id="sortByPriority" mnemonicParsing="false" onAction="#sort_by_priority" text="Podle priority" />
+                  <CheckMenuItem fx:id="sortByDeadline" mnemonicParsing="false" onAction="#sort_by_deadline" text="Podle deadline" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Akce">
+            <items>
+                  <CheckMenuItem fx:id="clearDone" mnemonicParsing="false" onAction="#clear_done" text="Skrýt hotové" />
+                  <MenuItem fx:id="addUkol" mnemonicParsing="false" onAction="#add_task" text="Přidat úkol" />
+                  <MenuItem mnemonicParsing="false" onAction="#refresh" text="Aktualizovat stránku" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Label fx:id="timeLabel" layoutX="423.0" layoutY="5.0" prefHeight="30.0" prefWidth="98.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="0.0" />
+      <Button id="logout" layoutX="593.0" layoutY="1.0" mnemonicParsing="false" onAction="#log_out" prefHeight="30.0" prefWidth="70.0" stylesheets="@../CSS/style.css" text="Log out" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="0.0" />
+       <Button id="closeButt" fx:id="closeButton" layoutX="663.0" layoutY="-1.0" mnemonicParsing="false" onAction="#close" prefHeight="30.0" prefWidth="40.0" stylesheets="@../CSS/style.css" text="×" AnchorPane.rightAnchor="0.0" />
+      <ScrollPane id="scrollPane" fx:id="scroll" layoutY="27.0" prefHeight="475.0" prefWidth="700.0" stylesheets="@../CSS/ScrollPane.css" />
+   </children>
+</AnchorPane>
